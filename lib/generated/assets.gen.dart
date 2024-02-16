@@ -8,24 +8,104 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
+
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/Group 1.svg
+  SvgGenImage get group1 => const SvgGenImage('assets/icons/Group 1.svg');
+
+  /// File path: assets/icons/Home.svg
+  SvgGenImage get home => const SvgGenImage('assets/icons/Home.svg');
+
+  /// File path: assets/icons/Signal 1.svg
+  SvgGenImage get signal1 => const SvgGenImage('assets/icons/Signal 1.svg');
+
+  /// File path: assets/icons/Vector.svg
+  SvgGenImage get vector => const SvgGenImage('assets/icons/Vector.svg');
+
+  /// File path: assets/icons/add.svg
+  SvgGenImage get add => const SvgGenImage('assets/icons/add.svg');
+
+  /// File path: assets/icons/incognito.svg
+  SvgGenImage get incognito => const SvgGenImage('assets/icons/incognito.svg');
+
+  /// File path: assets/icons/premium.svg
+  SvgGenImage get premium => const SvgGenImage('assets/icons/premium.svg');
+
+  /// File path: assets/icons/pro.svg
+  SvgGenImage get pro => const SvgGenImage('assets/icons/pro.svg');
+
+  /// File path: assets/icons/pro_yelov.svg
+  SvgGenImage get proYelov => const SvgGenImage('assets/icons/pro_yelov.svg');
+
+  /// File path: assets/icons/profile.svg
+  SvgGenImage get profile => const SvgGenImage('assets/icons/profile.svg');
+
+  /// File path: assets/icons/rocket.svg
+  SvgGenImage get rocket => const SvgGenImage('assets/icons/rocket.svg');
+
+  /// File path: assets/icons/settings.svg
+  SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
+
+  /// File path: assets/icons/shield-check.svg
+  SvgGenImage get shieldCheck =>
+      const SvgGenImage('assets/icons/shield-check.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        group1,
+        home,
+        signal1,
+        vector,
+        add,
+        incognito,
+        premium,
+        pro,
+        proYelov,
+        profile,
+        rocket,
+        settings,
+        shieldCheck
+      ];
+}
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/bg.png
-  AssetGenImage get bg => const AssetGenImage('assets/images/bg.png');
+  /// File path: assets/images/Group 1371.png
+  AssetGenImage get group1371 =>
+      const AssetGenImage('assets/images/Group 1371.png');
 
-  /// File path: assets/images/paint.png
-  AssetGenImage get paint => const AssetGenImage('assets/images/paint.png');
+  /// File path: assets/images/map.png
+  AssetGenImage get map => const AssetGenImage('assets/images/map.png');
+
+  /// File path: assets/images/world map.png
+  AssetGenImage get worldMap =>
+      const AssetGenImage('assets/images/world map.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [bg, paint];
+  List<AssetGenImage> get values => [group1371, map, worldMap];
+}
+
+class $AssetsWebpagesGen {
+  const $AssetsWebpagesGen();
+
+  /// File path: assets/webpages/index.html
+  String get index => 'assets/webpages/index.html';
+
+  /// List of all assets
+  List<String> get values => [index];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsWebpagesGen webpages = $AssetsWebpagesGen();
 }
 
 class AssetGenImage {
@@ -94,6 +174,59 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:korsun/api/localization/dto.dart';
-import 'package:korsun/api/localization/request.dart';
-import 'package:korsun/utils/device.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vpn/api/localization/dto.dart';
+import 'package:vpn/api/localization/request.dart';
+
+import 'device.dart';
 
 class LanguageService extends ChangeNotifier {
   final _LanguagePrefs _prefs = _LanguagePrefs();

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:korsun/style.dart';
+import 'package:vpn/style.dart';
 
 class CustomSwitch extends StatelessWidget {
   final bool value;
