@@ -17,7 +17,9 @@ class ResetPasswordBloc extends BlocBaseWithState<ScreenState> {
     setState(ScreenState());
   }
 
-  void init(BuildContext context) async {}
+  void init(BuildContext context) async {
+    setState(ScreenState(context: context));
+  }
 
   void showDialogRecaptcha(
       BuildContext context, String email, ResetPasswordBloc bloc) async {
@@ -34,18 +36,17 @@ class ResetPasswordBloc extends BlocBaseWithState<ScreenState> {
         });
   }
 
-  void resetPassword(BuildContext context, String email, String captcha) async {
+  void resetPassword( String email, String captcha) async {
     try {
-      final model = SignUpModel(lang: 'en', email: email);
+      final model = SignUpModel(lang: 'en', email: email, gRecaptchaResponse: captcha);
       await authApi.resetPassword(model);
-      if (context.mounted) {
-        context.router.push(const AuthRoute());
-      }
+        currentState.context?.router.push(const AuthRoute());
+
     } on Exception catch (e) {
-      if (context.mounted) {
+      if (currentState.context?.mounted ?? false) {
         SnackBarService.showSnackBar(
-            context, e.toString().replaceAll('Exception: ', ''), true);
-        context.router.pop();
+            currentState.context!, e.toString().replaceAll('Exception: ', ''), true);
+        currentState.context?.router.pop();
       }
     }
   }
@@ -57,10 +58,12 @@ class ResetPasswordBloc extends BlocBaseWithState<ScreenState> {
 
 class ScreenState {
   final bool loading;
+  BuildContext? context;
 
-  ScreenState({this.loading = false});
+  ScreenState({this.loading = false, this.context});
 
-  ScreenState copyWith({bool? loading}) {
-    return ScreenState(loading: loading ?? this.loading);
+  ScreenState copyWith({bool? loading, BuildContext? context}) {
+    return ScreenState(
+        loading: loading ?? this.loading, context: context ?? this.context);
   }
 }

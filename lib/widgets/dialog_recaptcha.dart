@@ -49,7 +49,7 @@ class _DialogRecaptchaState extends State<DialogRecaptcha> {
       if(widget.page == 'signup') {
      widget.signUpBloc?.signUp(context, widget.email, widget.password, message.message);
       } else if(widget.page == 'resetPassword') {
-        widget.resetPasswordBloc?.resetPassword(context, widget.email, message.message);
+        widget.resetPasswordBloc?.resetPassword( widget.email, message.message);
       } else if(widget.page == 'login') {
         widget.loginBloc?.login(context, widget.email, widget.password, message.message);
       }

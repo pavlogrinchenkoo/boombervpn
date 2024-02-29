@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
-import 'package:vpn/screens/home_page/page.dart';
+import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/style.dart';
 
 late DataModel arcPoint;
@@ -17,6 +16,7 @@ late MapShapeLayerController controller;
 late List<Model> data;
 
 class MapAnimation extends StatefulWidget {
+  final MapLatLng getLocation;
   final bool isShowMarker;
   final bool isShowAnimation;
 
@@ -24,6 +24,7 @@ class MapAnimation extends StatefulWidget {
     super.key,
     required this.isShowMarker,
     required this.isShowAnimation,
+    required this.getLocation,
   });
 
   @override
@@ -43,14 +44,21 @@ class _MapAnimationState extends State<MapAnimation>
 
   void init() {
     controller = MapShapeLayerController();
-    data = <Model>[];
+    data = <Model>[
+          Model(widget.getLocation.latitude, widget.getLocation.longitude,
+              const Icon(Icons.home, color: Colors.white))
+
+    ];
     zoomPanBehavior = MapZoomPanBehavior(
+      enablePanning: false,
+      enablePinching: false,
       focalLatLng: const MapLatLng(40.1751, 25),
       zoomLevel: 3.8,
     );
     dataSource = const MapShapeSource.asset(
       'assets/world_map.json',
-      shapeDataField: 'continent',
+      // shapeDataField: 'continent',
+
     );
 
     animationController = AnimationController(
@@ -94,8 +102,14 @@ class _MapAnimationState extends State<MapAnimation>
               iconColor: Colors.black,
               iconStrokeWidth: 10,
               iconStrokeColor: Colors.black,
-              size: const Size(10, 10),
-              child: data[index].icon,
+              size: const Size(40, 40),
+              child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: SizedBox(
+                      width: 10,
+                      height: 10,
+                      child: data[index].icon)),
             );
           },
           sublayers: widget.isShowMarker
@@ -116,10 +130,10 @@ class _MapAnimationState extends State<MapAnimation>
                         from: arcPoint.from,
                         to: arcPoint.to,
                         color: widget.isShowAnimation ? BC.green : BC.blue,
-                        width: 11,
+                        width: 10,
                         heightFactor: 0,
                         controlPointFactor: 0.5,
-                        dashArray: [2, 20],
+                        dashArray: [2, 30],
                       ),
                     },
                     animation: animation,

@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:openvpn_flutter/openvpn_flutter.dart';
+import 'package:openvpn_sf_flutter/openvpn_flutter.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
-import 'package:vpn/api/cache.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/generated/assets.gen.dart';
-import 'package:vpn/routers/routes.dart';
+import 'package:vpn/main.dart';
 import 'package:vpn/screens/home_page/widgets/map_animation.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
@@ -15,7 +14,7 @@ import 'package:vpn/widgets/custom_indicator.dart';
 import 'package:vpn/widgets/custom_scaffold.dart';
 import 'bloc.dart';
 
-late HomeBloc homeBloc = HomeBloc();
+final HomeBloc homeBloc = HomeBloc();
 late OpenVPN engine;
 
 bool granted = false;
@@ -81,32 +80,49 @@ class _HomePageState extends State<HomePage> {
             showGoPro: 'blue',
             body: !(state.loading)
                 ? const CustomIndicator()
-                : Column(
+                : Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: CustomCard(
-                            onTap: () => homeBloc.goListLocations(context),
-                            title: state.server?.code,
-                            image: state.server?.flag),
+                      Space.h16,
+                      MapAnimation(
+                        isShowMarker: state.isShowMarker ?? false,
+                        isShowAnimation: state.isShowAnimation ?? false,
+                        getLocation: state.latLng ?? const MapLatLng(1, 1),
                       ),
                       Space.h16,
-                      Expanded(
-                          child: MapAnimation(
-                            isShowMarker: state.isShowMarker ?? false,
-                            isShowAnimation: state.isShowAnimation ?? false,
-                          )),
-                      Space.h16,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: _MainButton(
-                          onTap: () {
-                            homeBloc.connected(
-                              context,
-                              state.server ?? Server(),
-                            );
-                            homeBloc.startAnimation();
-                          },
+                      Positioned(
+                        top: 24,
+                        right: 0,
+                        left: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: CustomCard(
+                            onTap: () => homeBloc.goListLocations(context),
+                            title: state.server?.code,
+                            image: state.server?.flag,
+                            isConnected: state.isConnected,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 70,
+                        right: MediaQuery.of(context).size.width / 4,
+                        left: MediaQuery.of(context).size.width / 4,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: _MainButton(
+                            isConnected: state.isConnected,
+                            onTap: () {
+                              if (!(state.isConnected)) {
+                                homeBloc.connected(
+                                  context,
+                                  state.server ?? Server(),
+                                );
+                              } else {
+                                homeBloc.disconnect();
+                              }
+                              // homeBloc.startAnimation();
+                            },
+                          ),
                         ),
                       ),
                       Space.h50,
@@ -118,29 +134,33 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _MainButton extends StatelessWidget {
+  final bool isConnected;
   final Function()? onTap;
 
-  const _MainButton({super.key, this.onTap});
+  const _MainButton({super.key, this.onTap, this.isConnected = false});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(100),
-      child: Container(
-        height: 148,
-        width: 148,
-        decoration: BoxDecoration(
-          color: BC.darkGrey,
-          shape: BoxShape.circle,
-        ),
+    return Container(
+      height: 148,
+      width: 148,
+      decoration: BoxDecoration(
+        color: BC.darkGrey,
+        shape: BoxShape.circle,
+      ),
+      child: InkWell(
+        onTap: onTap,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        borderRadius: BorderRadius.circular(148),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Assets.icons.group1.svg(),
             Space.h16,
+            // TODO все текста повинні бути в локалізаціїї
             Text(
-              'Connect by ping',
+              isConnected ? 'Disconnect' : 'Connect by ping',
               style: BS.bold12,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,

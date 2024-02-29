@@ -29,9 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomStreamBuilder(
+    return CustomStreamBuilder<ScreenState>(
         bloc: bloc,
-        builder: (context,ScreenState state) {
+        builder: (context, state) {
           final s = S.of(context);
           return CustomScaffold(
               showGoPro: 'Yellow',

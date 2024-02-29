@@ -46,7 +46,7 @@ class LoginBloc extends BlocBaseWithState<ScreenState> {
   void showDialogRecaptcha(BuildContext context, String email, String password,
       LoginBloc bloc) async {
     if (email.isNotEmpty || password.isNotEmpty) {
-      if (password.length <= 8) {
+      if (password.length >= 8) {
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,

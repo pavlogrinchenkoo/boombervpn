@@ -16,11 +16,11 @@ class GoProPage extends StatefulWidget {
 }
 
 class _GoProPageState extends State<GoProPage> {
-  late GoProBloc bloc = GoProBloc();
+  final GoProBloc _bloc = GoProBloc();
 
   @override
   void initState() {
-    bloc.init();
+    _bloc.init();
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _GoProPageState extends State<GoProPage> {
   Widget build(BuildContext context) {
     final s = S.of(context);
     return CustomStreamBuilder(
-        bloc: bloc,
+        bloc: _bloc,
         builder: (BuildContext context, state) {
           return Scaffold(
             backgroundColor: BC.black,
@@ -211,6 +211,7 @@ class _CustomBuyButton extends StatelessWidget {
   }
 }
 
+// TODO rename
 class _GrayButtton extends StatelessWidget {
   final Function()? onTap;
   final String title;

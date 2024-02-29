@@ -29,13 +29,17 @@ Server _$ServerFromJson(Map<String, dynamic> json) => Server(
       pingHost: json['ping_host'] as String?,
       flag: json['flag'] as String?,
       code: json['code'] as String?,
-    );
+    )
+      ..latitude = (json['latitude'] as num?)?.toDouble()
+      ..longitude = (json['longitude'] as num?)?.toDouble();
 
 Map<String, dynamic> _$ServerToJson(Server instance) => <String, dynamic>{
       'type': instance.type,
       'ping_host': instance.pingHost,
       'flag': instance.flag,
       'code': instance.code,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
     };
 
 ConnectResponseModel _$ConnectResponseModelFromJson(
@@ -69,4 +73,14 @@ Map<String, dynamic> _$ConnectRequestModelToJson(
       'status': instance.status,
       'ovpn': instance.ovpn,
       'encoding': instance.encoding,
+    };
+
+LatLon _$LatLonFromJson(Map<String, dynamic> json) => LatLon(
+      lat: (json['lat'] as num).toDouble(),
+      lon: (json['lon'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$LatLonToJson(LatLon instance) => <String, dynamic>{
+      'lat': instance.lat,
+      'lon': instance.lon,
     };

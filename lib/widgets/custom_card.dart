@@ -9,7 +9,8 @@ class CustomCard extends StatelessWidget {
   final String? image;
   final String? status;
   final String? ip;
-  const CustomCard({super.key, this.onTap, this.title, this.image, this.status, this.ip});
+  final bool isConnected;
+  const CustomCard({super.key, this.onTap, this.title, this.image, this.status, this.ip, required this.isConnected });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CustomCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Status: not connected',
+                 isConnected ? 'Status: connected' : 'Status: not connected',
                   style: BS.bold12,
                 ),
                 Text(

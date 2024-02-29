@@ -28,9 +28,9 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    return CustomStreamBuilder(
+    return CustomStreamBuilder<ScreenState>(
         bloc: bloc,
-        builder: (BuildContext context, state) {
+        builder: (context, state) {
           return Scaffold(
             backgroundColor: BC.black,
             appBar: AppBar(
@@ -44,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 _CustomContainer(
                   title: s.connection_mode,
                   name: s.open_vpn,
-                  onTap: () => bloc.openVpn(state.isOpenVpn),
+                  onTap: () {},
                   isShowButton: state.isOpenVpn,
                 ),
                 Space.h16,

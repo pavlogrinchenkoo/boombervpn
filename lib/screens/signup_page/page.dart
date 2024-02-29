@@ -25,7 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-
   @override
   void initState() {
     bloc.init(context);
@@ -41,54 +40,62 @@ class _SignUpPageState extends State<SignUpPage> {
           final s = S.of(context);
           return CustomScaffold(
               body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 43.0),
-                child: Column(
+            padding: const EdgeInsets.symmetric(horizontal: 43.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Assets.images.map.image(
+                  width: 180,
+                  height: 110,
+                  fit: BoxFit.cover,
+                ),
+                Space.h32,
+                Text(s.sign_up, style: BS.bold24),
+                Space.h24,
+                CustomField(
+                  controller: emailController,
+                  text: s.email,
+                  isEmailField: true,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                Space.h16,
+                CustomField(
+                  controller: passwordController,
+                  text: s.password,
+                  keyboardType: TextInputType.visiblePassword,
+                ),
+                Space.h24,
+                CustomButtonGray(
+                  onTap: () {
+                    bloc.showDialogRecaptcha(context, emailController.text,
+                        passwordController.text, bloc);
+                    // bloc.signUp(context, emailController.text, passwordController.text);
+                  },
+                  text: s.sign_up,
+                ),
+                Space.h32,
+                Text(s.by_creating_an_account,
+                    style: BS.reg13.apply(color: BC.white)),
+                Space.h4,
+                CustomTextButton(
+                  onTap: () => bloc.goTerms(context),
+                  text: s.terms_of_service,
+                ),
+                Space.h16,
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Assets.images.map.image(
-                      width: 180,
-                      height: 110,
-                      fit: BoxFit.cover,
-                    ),
-                    Space.h32,
-                    Text(s.sign_up, style: BS.bold24),
-                    Space.h24,
-                    CustomField(controller: emailController, text: s.email, isEmailField: true),
-                    Space.h16,
-                    CustomField(
-                        controller: passwordController, text: s.password),
-                    Space.h24,
-
-                    CustomButtonGray(
-                      onTap: () {
-                        bloc.showDialogRecaptcha(context, emailController.text, passwordController.text, bloc);
-                        // bloc.signUp(context, emailController.text, passwordController.text);
-                      },
-                      text: s.sign_up,
-                    ),
-                    Space.h32,
-                    Text(s.by_creating_an_account,
+                    Text('${s.already_have_an_account} ',
                         style: BS.reg13.apply(color: BC.white)),
-                    Space.h4,
                     CustomTextButton(
-                      onTap: () => bloc.goTerms(context),
-                      text: s.terms_of_service,
-                    ),
-                    Space.h16,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('${s.already_have_an_account} ',
-                            style: BS.reg13.apply(color: BC.white)),
-                        CustomTextButton(
-                          onTap: () => bloc.goLogin(context),
-                          text: s.log_in,
-                        )
-                      ],
+                      onTap: () => bloc.goLogin(context),
+                      text: s.log_in,
                     )
                   ],
-                ),
-              ));
+                )
+              ],
+            ),
+          ));
         });
   }
 }

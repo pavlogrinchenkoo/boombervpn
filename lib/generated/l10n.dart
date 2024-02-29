@@ -340,20 +340,20 @@ class S {
     );
   }
 
-  /// `Connect when Prime VPN starts`
+  /// `Connect when Bomber VPN starts`
   String get connect_when_prime_vpn_starts {
     return Intl.message(
-      'Connect when Prime VPN starts',
+      'Connect when Bomber VPN starts',
       name: 'connect_when_prime_vpn_starts',
       desc: '',
       args: [],
     );
   }
 
-  /// `Show notification when Prime VPN is not connected`
+  /// `Show notification when Bomber VPN is not connected`
   String get show_notification_when_prime_vpn_is_not_connected {
     return Intl.message(
-      'Show notification when Prime VPN is not connected',
+      'Show notification when Bomber VPN is not connected',
       name: 'show_notification_when_prime_vpn_is_not_connected',
       desc: '',
       args: [],

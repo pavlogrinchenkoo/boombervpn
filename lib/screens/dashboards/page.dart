@@ -1,11 +1,10 @@
-import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:vpn/generated/assets.gen.dart';
 import 'package:vpn/routers/routes.dart';
 import 'package:vpn/style.dart';
 
-import 'widgets/custom_icon.dart';
+import 'widgets/export.dart';
 
 @RoutePage()
 class DashBoardPage extends StatefulWidget {
@@ -18,6 +17,7 @@ class DashBoardPage extends StatefulWidget {
 class _DashBoardPageState extends State<DashBoardPage> {
   @override
   Widget build(context) {
+    // TODO вынести в константы из билда
     final List<NavigationBarItem> items = [
       NavigationBarItem(
         icon: Assets.icons.profile.svg(),

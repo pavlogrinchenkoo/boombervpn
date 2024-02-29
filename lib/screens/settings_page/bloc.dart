@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:vpn/api/cache.dart';
 import 'package:vpn/routers/routes.dart';
 import 'package:vpn/utils/bloc_base.dart';
 
@@ -7,25 +8,34 @@ class SettingsBloc extends BlocBaseWithState<ScreenState> {
   @override
   ScreenState get currentState => super.currentState!;
 
+  Cache cache = Cache();
+
   SettingsBloc() {
     setState(ScreenState());
   }
 
-  void init() async {}
-
-  void openVpn(bool isOpenVpn) {
-    setState(currentState.copyWith(isOpenVpn: !isOpenVpn));
+  void init() async {
+    final isBlockInternet = await cache.getBlockInternet();
+    final isConnectVPN = await cache.getConnectVPN();
+    final isShowNotification = await cache.getShowNotification();
+    setState(currentState.copyWith(
+        isBlockInternet: isBlockInternet,
+        isPrimeVpn: isConnectVPN,
+        isShowNotification: isShowNotification));
   }
 
-  void changeBlockInternet(bool isBlockInternet) {
+  void changeBlockInternet(bool isBlockInternet) async {
+    await cache.saveBlockInternet(!isBlockInternet);
     setState(currentState.copyWith(isBlockInternet: !isBlockInternet));
   }
 
-  void changePrimeVpn(bool isPrimeVpn) {
+  void changePrimeVpn(bool isPrimeVpn) async {
+    await cache.saveConnectVPN(!isPrimeVpn);
     setState(currentState.copyWith(isPrimeVpn: !isPrimeVpn));
   }
 
-  void changeShowNotification(bool isShowNotification) {
+  void changeShowNotification(bool isShowNotification) async {
+    await cache.saveShowNotification(!isShowNotification);
     setState(currentState.copyWith(isShowNotification: !isShowNotification));
   }
 }
@@ -39,7 +49,7 @@ class ScreenState {
 
   ScreenState(
       {this.loading = false,
-      this.isOpenVpn = false,
+      this.isOpenVpn = true,
       this.isBlockInternet = false,
       this.isPrimeVpn = false,
       this.isShowNotification = false});

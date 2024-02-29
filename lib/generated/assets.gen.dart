@@ -106,6 +106,10 @@ class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsWebpagesGen webpages = $AssetsWebpagesGen();
+  static const String worldMap = 'assets/world_map.json';
+
+  /// List of all assets
+  List<String> get values => [worldMap];
 }
 
 class AssetGenImage {

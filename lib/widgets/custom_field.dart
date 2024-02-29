@@ -5,14 +5,15 @@ class CustomField extends StatelessWidget {
   final TextEditingController controller;
   final String? text;
   final bool? isEmailField;
+  final  TextInputType? keyboardType;
 
-  const CustomField({super.key, required this.controller, this.text, this.isEmailField = false});
+  const CustomField({super.key, required this.controller, this.text, this.isEmailField = false, this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
         controller: controller,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: keyboardType,
         style: BS.reg15,
         cursorColor: BC.darkGrey,
         decoration: InputDecoration(

@@ -38,6 +38,7 @@ class _ListLocationsPageState extends State<ListLocationsPage> {
               showGoPro: 'yellow',
               body: !(state.loading)
                   ? const CustomIndicator()
+              // TODO винести у приватний віджет
                   : ListView(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       children: [

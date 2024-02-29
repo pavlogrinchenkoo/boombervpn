@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "By creating an account, you have agree to our"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "connect_when_prime_vpn_starts": MessageLookupByLibrary.simpleMessage(
-            "Connect when Prime VPN starts"),
+            "Connect when Bomber VPN starts"),
         "connection": MessageLookupByLibrary.simpleMessage("Connection"),
         "connection_mode":
             MessageLookupByLibrary.simpleMessage("Connection Mode"),
@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("7-day free trial. Then 9.99"),
         "show_notification_when_prime_vpn_is_not_connected":
             MessageLookupByLibrary.simpleMessage(
-                "Show notification when Prime VPN is not connected"),
+                "Show notification when Bomber VPN is not connected"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sign_up_with_a_different_email": MessageLookupByLibrary.simpleMessage(
             "Sign up with a different email"),

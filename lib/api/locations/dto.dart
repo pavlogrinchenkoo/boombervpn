@@ -29,6 +29,8 @@ class Server {
   String? pingHost;
   String? flag;
   String? code;
+  double? latitude;
+  double? longitude;
 
   Server({
      this.type,
@@ -76,5 +78,18 @@ class ConnectRequestModel {
       _$ConnectRequestModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ConnectRequestModelToJson(this);
+}
+
+@JsonSerializable()
+class LatLon{
+  final double lat;
+  final double lon;
+
+  LatLon({required this.lat, required this.lon});
+
+  factory LatLon.fromJson(Map<String, dynamic> json) =>
+      _$LatLonFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LatLonToJson(this);
 }
 

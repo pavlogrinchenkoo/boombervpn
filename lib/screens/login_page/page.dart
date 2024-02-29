@@ -32,7 +32,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    return CustomStreamBuilder(
+    // TODO везде пропписать тип
+    return CustomStreamBuilder<ScreenState>(
         bloc: bloc,
         builder: (context, state) {
           return CustomScaffold(
@@ -46,11 +47,13 @@ class _LoginPageState extends State<LoginPage> {
                 CustomField(
                   controller: emailController,
                   text: s.email,
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 Space.h16,
                 CustomField(
                   controller: passwordController,
                   text: s.password,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
                 Space.h24,
                 CustomButtonGray(

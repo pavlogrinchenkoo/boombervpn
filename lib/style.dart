@@ -27,7 +27,7 @@ abstract class BC {
 }
 
 abstract class BS {
-
+// TODO otstup
 
   static TextStyle get bold50 => TextStyle(
     fontFamily: 'Roboto',
@@ -145,7 +145,7 @@ abstract class BS {
     letterSpacing: -0.02,
     color: BC.white,
   );
-
+// TODO otstup
 
 
   static TextStyle get reg18 => TextStyle(
