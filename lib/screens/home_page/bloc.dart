@@ -130,7 +130,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
 
     List<Model> newData = [
       Model(getLocation.latitude, getLocation.longitude,
-          const Icon(Icons.home, color: Colors.transparent)),
+          const Icon(Icons.person, color: Colors.transparent)),
       Model(
           server.latitude ?? 1,
           server.longitude ?? 1,

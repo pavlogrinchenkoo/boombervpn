@@ -109,19 +109,23 @@ class _MapAnimationState extends State<MapAnimation>
                   child: SizedBox(
                       width: 10,
                       height: 10,
-                      child: data[index].icon)),
+                      child: Stack(
+                        children: [
+                          data[index].icon,
+                        ],
+                      ))),
             );
           },
           sublayers: widget.isShowMarker
               ? [
                   MapArcLayer(
-                    arcs: <MapArc>{
+                    arcs: {
                       MapArc(
                         from: arcPoint.from,
                         to: arcPoint.to,
                         color: widget.isShowAnimation
-                            ? BC.green.withOpacity(0.5)
-                            : BC.blue.withOpacity(0.5),
+                            ? BC.black.withOpacity(0.5)
+                            : BC.black.withOpacity(0.5),
                         width: 10,
                         heightFactor: 0,
                         controlPointFactor: 0.5,
@@ -129,7 +133,16 @@ class _MapAnimationState extends State<MapAnimation>
                       MapArc(
                         from: arcPoint.from,
                         to: arcPoint.to,
-                        color: widget.isShowAnimation ? BC.green : BC.blue,
+                        color: widget.isShowAnimation ? BC.purple : BC.purple,
+                        width: 10,
+                        heightFactor: 0,
+                        controlPointFactor: 0.5,
+                        dashArray: [2, 30],
+                      ),
+                      MapArc(
+                        from: arcPoint.from,
+                        to: arcPoint.to,
+                        color: Colors.transparent,
                         width: 10,
                         heightFactor: 0,
                         controlPointFactor: 0.5,
