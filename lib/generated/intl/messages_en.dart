@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kill_switch": MessageLookupByLibrary.simpleMessage("Kill Switch"),
         "log_in": MessageLookupByLibrary.simpleMessage("Log in"),
         "logo": MessageLookupByLibrary.simpleMessage("Bomber VPN"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "one_month": MessageLookupByLibrary.simpleMessage("1 MONTH"),
         "one_year": MessageLookupByLibrary.simpleMessage("1 YEAR"),

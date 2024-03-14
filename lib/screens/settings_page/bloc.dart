@@ -24,9 +24,16 @@ class SettingsBloc extends BlocBaseWithState<ScreenState> {
         isShowNotification: isShowNotification));
   }
 
-  void changeBlockInternet(bool isBlockInternet) async {
-    await cache.saveBlockInternet(!isBlockInternet);
-    setState(currentState.copyWith(isBlockInternet: !isBlockInternet));
+  void changeBlockInternet(bool isBlockInternet, BuildContext context) async {
+    final subscribe = await cache.getSubscribe();
+    if (subscribe) {
+      await cache.saveBlockInternet(!isBlockInternet);
+      setState(currentState.copyWith(isBlockInternet: !isBlockInternet));
+    } else {
+      if (context.mounted) {
+        context.router.push(const GoProRoute());
+      }
+    }
   }
 
   void changePrimeVpn(bool isPrimeVpn) async {
@@ -37,6 +44,18 @@ class SettingsBloc extends BlocBaseWithState<ScreenState> {
   void changeShowNotification(bool isShowNotification) async {
     await cache.saveShowNotification(!isShowNotification);
     setState(currentState.copyWith(isShowNotification: !isShowNotification));
+  }
+
+  void logout(BuildContext context) async {
+    await cache.removeUser();
+    await cache.removeServer();
+    await cache.saveBlockInternet(false);
+    await cache.saveConnectVPN(false);
+    await cache.saveShowNotification(false);
+    await cache.saveSubscribe(false);
+    if (context.mounted) {
+      context.router.replaceAll([const AuthRoute()]);
+    }
   }
 }
 

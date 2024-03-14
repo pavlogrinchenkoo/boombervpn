@@ -10,6 +10,8 @@ import 'package:vpn/widgets/custom_scaffold.dart';
 import 'bloc.dart';
 import 'widgets/vip_indicator.dart';
 
+final ProfileBloc blocProfile = ProfileBloc();
+
 @RoutePage()
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -19,102 +21,103 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late ProfileBloc bloc = ProfileBloc();
-
   @override
   void initState() {
-    bloc.init();
+    blocProfile.init();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomStreamBuilder<ScreenState>(
-        bloc: bloc,
+        bloc: blocProfile,
         builder: (context, state) {
           final s = S.of(context);
           return CustomScaffold(
               showGoPro: 'Yellow',
-              body: (!(state.loading)) ? const CustomIndicator() : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: [
-                    Space.h32,
-                  if(state.isVip) const VipIndicator(),
-                    Space.h24,
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(14, 21, 14, 11),
-                      decoration: BoxDecoration(
-                        borderRadius: BRadius.r18,
-                        color: BC.darkGrey,
-                      ),
+              body: (!(state.loading))
+                  ? const CustomIndicator()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
                         children: [
-                          _CustomText(
-                            name: s.email,
-                            description: state.user?.user?.email,
-                          ),
-                          // _CustomText(
-                          //   name: s.country,
-                          //   description: state.user?.user?.admin,
-                          // ),
-                          // _CustomText(
-                          //   name: s.city,
-                          //   description: 'UserEmail',
-                          // ),
-                          // const _CustomText(
-                          //   name: 'ISP',
-                          //   description: 'UserEmail',
-                          // ),
-                           _CustomText(
-                            name: 'IP',
-                            description: state.user?.ip,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Space.h8,
-                    Text(
-                      s.this_information_is_only_available_on_your_device,
-                      style: BS.bold12,
-                    ),
-                    Space.h32,
-                    Space.h24,
-                    if (!(state.isVip))
-                      InkWell(
-                        onTap: () => bloc.goPro(context),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 14, vertical: 21),
-                          decoration: BoxDecoration(
-                            borderRadius: BRadius.r18,
-                            color: BC.darkGrey,
-                          ),
-                          child: Center(
+                          Space.h32,
+                          if (state.isVip) const VipIndicator(),
+                          Space.h24,
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(14, 21, 14, 11),
+                            decoration: BoxDecoration(
+                              borderRadius: BRadius.r18,
+                              color: BC.darkGrey,
+                            ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                GradientText(
-                                  s.get_access_to_unlimited_speed_and_premium_locations,
-                                  gradient: LinearGradient(
-                                    colors: [BC.purple, BC.braun],
-                                  ),
-                                  style: BS.bold24,
+                                _CustomText(
+                                  name: s.email,
+                                  description: state.user?.user?.email,
                                 ),
-                                Space.h8,
-                                Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: BC.white,
-                                  size: 24,
+                                // _CustomText(
+                                //   name: s.country,
+                                //   description: state.user?.user?.admin,
+                                // ),
+                                // _CustomText(
+                                //   name: s.city,
+                                //   description: 'UserEmail',
+                                // ),
+                                // const _CustomText(
+                                //   name: 'ISP',
+                                //   description: 'UserEmail',
+                                // ),
+                                _CustomText(
+                                  name: 'IP',
+                                  description: state.user?.ip,
                                 ),
                               ],
                             ),
                           ),
-                        ),
+                          Space.h8,
+                          Text(
+                            s.this_information_is_only_available_on_your_device,
+                            style: BS.bold12,
+                          ),
+                          Space.h32,
+                          Space.h24,
+                          if (!(state.isVip))
+                            InkWell(
+                              borderRadius: BRadius.r18,
+                              onTap: () => blocProfile.goPro(context),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 14, vertical: 21),
+                                decoration: BoxDecoration(
+                                  borderRadius: BRadius.r18,
+                                  color: BC.darkGrey,
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GradientText(
+                                        s.get_access_to_unlimited_speed_and_premium_locations,
+                                        gradient: LinearGradient(
+                                          colors: [BC.purple, BC.braun],
+                                        ),
+                                        style: BS.bold24,
+                                      ),
+                                      Space.h8,
+                                      Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: BC.white,
+                                        size: 24,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                  ],
-                ),
-              ));
+                    ));
         });
   }
 }
@@ -164,18 +167,13 @@ class GradientText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) => gradient.createShader(
-        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-      ),
-      child: Text(
-        text,
-        style: style.copyWith(color: Colors.white),
-        textAlign: TextAlign.center,
-      ),
+    return Text(
+      text,
+      style: style.copyWith(
+          foreground: Paint()
+            ..shader =
+                gradient.createShader(const Rect.fromLTRB(0, 0, 350, 200))),
+      textAlign: TextAlign.center,
     );
   }
 }
-
-
-

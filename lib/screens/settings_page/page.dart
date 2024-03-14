@@ -6,6 +6,7 @@ import 'package:vpn/routers/routes.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
 import 'package:vpn/utils/spaces.dart';
+import 'package:vpn/widgets/custom_buttom.dart';
 import 'bloc.dart';
 
 @RoutePage()
@@ -30,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final s = S.of(context);
     return CustomStreamBuilder<ScreenState>(
         bloc: bloc,
-        builder: (context, state) {
+        builder: (BuildContext context, ScreenState state) {
           return Scaffold(
             backgroundColor: BC.black,
             appBar: AppBar(
@@ -53,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   name: s.block_internet_when_connecting_or_changing_servers,
                   value: state.isBlockInternet,
                   isShowVip: true,
-                  onTap: (value) => bloc.changeBlockInternet(state.isBlockInternet),
+                  onTap: (value) => bloc.changeBlockInternet(state.isBlockInternet, context),
                 ),
                 Space.h16,
                 _CustomContainerSwitch(
@@ -69,6 +70,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   value: state.isShowNotification,
                   onTap: (value) => bloc.changeShowNotification(state.isShowNotification),
                 ),
+                Space.h32,
+                CustomButtonGray(
+                  onTap: () => bloc.logout(context),
+                  text: s.logout,
+                )
               ],
             ),
           );

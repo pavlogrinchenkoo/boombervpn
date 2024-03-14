@@ -45,6 +45,18 @@ class Cache {
     return user;
   }
 
+  Future<void> saveSubscribe(bool subscribe) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('subscribe');
+    await prefs.setBool('subscribe', subscribe);
+  }
+
+  Future<bool> getSubscribe() async {
+    final prefs = await SharedPreferences.getInstance();
+    final subscribe = prefs.getBool('subscribe');
+    return subscribe ?? false;
+  }
+
   Future<void> saveBlockInternet(bool blockInternet) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('blockInternet');

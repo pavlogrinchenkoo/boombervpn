@@ -32,10 +32,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    // TODO везде пропписать тип
     return CustomStreamBuilder<ScreenState>(
         bloc: bloc,
-        builder: (context, state) {
+        builder: (BuildContext context, ScreenState state) {
           return CustomScaffold(
               body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 43),
@@ -53,6 +52,8 @@ class _LoginPageState extends State<LoginPage> {
                 CustomField(
                   controller: passwordController,
                   text: s.password,
+                  isShowPassword: state.isShowPassword,
+                  onTap: () => bloc.changePasswordVisibility(),
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 Space.h24,

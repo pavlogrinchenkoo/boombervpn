@@ -46,7 +46,7 @@ class _MapAnimationState extends State<MapAnimation>
     controller = MapShapeLayerController();
     data = <Model>[
           Model(widget.getLocation.latitude, widget.getLocation.longitude,
-              const Icon(Icons.home, color: Colors.white))
+              const Icon(Icons.person, color: Colors.white))
 
     ];
     zoomPanBehavior = MapZoomPanBehavior(

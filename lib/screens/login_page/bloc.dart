@@ -71,14 +71,18 @@ class LoginBloc extends BlocBaseWithState<ScreenState> {
   void goResetPassword(BuildContext context) {
     context.router.push(const ResetPasswordRoute());
   }
+
+  void changePasswordVisibility() {
+    setState(currentState.copyWith(isShowPassword: !(currentState.isShowPassword)));
+  }
 }
 
 class ScreenState {
-  final bool loading;
+  final bool isShowPassword;
 
-  ScreenState({this.loading = false});
+  ScreenState({this.isShowPassword = false});
 
-  ScreenState copyWith({bool? loading}) {
-    return ScreenState(loading: loading ?? this.loading);
+  ScreenState copyWith({bool? isShowPassword}) {
+    return ScreenState(isShowPassword: isShowPassword ?? this.isShowPassword);
   }
 }

@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return CustomStreamBuilder(
         bloc: bloc,
-        builder: (context, state) {
+        builder: (context, ScreenState state) {
           final s = S.of(context);
           return CustomScaffold(
               body: Padding(
@@ -63,6 +63,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   controller: passwordController,
                   text: s.password,
                   keyboardType: TextInputType.visiblePassword,
+                  isEmailField: false,
+                  isShowPassword: state.isShowPassword,
+                  onTap: () {
+                    bloc.changePasswordVisibility();
+                  },
                 ),
                 Space.h24,
                 CustomButtonGray(

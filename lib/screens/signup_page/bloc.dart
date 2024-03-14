@@ -59,6 +59,10 @@ class SignUpBloc extends BlocBaseWithState<ScreenState> {
         context.router.push(VerifyEmailRoute(signUpModel: model));
       }
     } on Exception catch (e) {
+      if (context.mounted) {
+        SnackBarService.showSnackBar(context, e.toString().replaceAll('Exception: ','' ), true);
+        context.router.pop();
+      }
       print(e);
     }
   }
@@ -68,14 +72,17 @@ class SignUpBloc extends BlocBaseWithState<ScreenState> {
   }
 
   void goTerms(BuildContext context) {}
+
+  void changePasswordVisibility() {
+    setState(currentState.copyWith(isShowPassword: !(currentState.isShowPassword)));
+  }
 }
 
 class ScreenState {
-  final bool loading;
+  final bool isShowPassword;
+  ScreenState({this.isShowPassword = false});
 
-  ScreenState({this.loading = false});
-
-  ScreenState copyWith({bool? loading}) {
-    return ScreenState(loading: loading ?? this.loading);
+  ScreenState copyWith({bool? isShowPassword}) {
+    return ScreenState(isShowPassword: isShowPassword ?? this.isShowPassword);
   }
 }
