@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/cache.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/api/locations/request.dart';
+import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/main.dart';
 import 'package:vpn/routers/routes.dart';
 import 'package:vpn/screens/home_page/page.dart';
@@ -85,11 +86,12 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
         );
         startAnimation(server);
       }
-      setState(currentState.copyWith(isConnected: true));
+      final getIp = await locationsApi.getIp();
+      setState(currentState.copyWith(isConnected: true, ip: getIp));
     } on Exception catch (e) {
       final notification = await cache.getShowNotification();
       if (notification) {
-        showNotification();
+        if (context.mounted) showNotification(context);
       }
     }
   }
@@ -162,7 +164,8 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     animationGreenLineController.forward(from: 0);
   }
 
-  Future<void> showNotification() async {
+  Future<void> showNotification(BuildContext context) async {
+    final s = S.of(context); // for localization.
     try {
       const AndroidNotificationDetails androidNotificationDetails =
           AndroidNotificationDetails('your channel id', 'your channel name',
@@ -173,7 +176,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       const NotificationDetails notificationDetails =
           NotificationDetails(android: androidNotificationDetails);
       await flutterLocalNotificationsPlugin.show(
-          0, 'Bomber VPN', 'Server not connected', notificationDetails,
+          0, 'Bomber VPN', s.server_not_connected, notificationDetails,
           payload: 'item x');
     } on Exception catch (e) {
       print(e);
@@ -243,6 +246,7 @@ class ScreenState {
   final bool? isShowAnimation;
   final bool isConnected;
   final MapLatLng? latLng;
+  final String ip;
 
   ScreenState(
       {this.loading = false,
@@ -251,7 +255,8 @@ class ScreenState {
       this.isShowMarker = false,
       this.isShowAnimation = false,
       this.isConnected = false,
-      this.latLng});
+      this.latLng,
+      this.ip = ''});
 
   ScreenState copyWith(
       {bool? loading,
@@ -260,7 +265,8 @@ class ScreenState {
       bool? isShowMarker,
       bool? isShowAnimation,
       bool? isConnected,
-      MapLatLng? latLng}) {
+      MapLatLng? latLng,
+      String? ip}) {
     return ScreenState(
         loading: loading ?? this.loading,
         server: server ?? this.server,
@@ -268,6 +274,7 @@ class ScreenState {
         isShowMarker: isShowMarker ?? this.isShowMarker,
         isShowAnimation: isShowAnimation ?? this.isShowAnimation,
         isConnected: isConnected ?? this.isConnected,
-        latLng: latLng ?? this.latLng);
+        latLng: latLng ?? this.latLng,
+        ip: ip ?? this.ip);
   }
-}
+  }

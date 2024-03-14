@@ -510,6 +510,96 @@ class S {
     );
   }
 
+  /// `Freemium locations`
+  String get freemium_locations {
+    return Intl.message(
+      'Freemium locations',
+      name: 'freemium_locations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium locations`
+  String get premium_locations {
+    return Intl.message(
+      'Premium locations',
+      name: 'premium_locations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connect by ping`
+  String get connect_by_ping {
+    return Intl.message(
+      'Connect by ping',
+      name: 'connect_by_ping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disconnect`
+  String get disconnect {
+    return Intl.message(
+      'Disconnect',
+      name: 'disconnect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status: connected`
+  String get status_connected {
+    return Intl.message(
+      'Status: connected',
+      name: 'status_connected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status: not connected`
+  String get status_not_connected {
+    return Intl.message(
+      'Status: not connected',
+      name: 'status_not_connected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SELECT LOCATION`
+  String get select_location {
+    return Intl.message(
+      'SELECT LOCATION',
+      name: 'select_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select`
+  String get select {
+    return Intl.message(
+      'Select',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Server not connected`
+  String get server_not_connected {
+    return Intl.message(
+      'Server not connected',
+      name: 'server_not_connected',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Send`
   String get Send {
     return Intl.message(

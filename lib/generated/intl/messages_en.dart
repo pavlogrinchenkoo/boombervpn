@@ -36,12 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "by_creating_an_account": MessageLookupByLibrary.simpleMessage(
             "By creating an account, you have agree to our"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
+        "connect_by_ping":
+            MessageLookupByLibrary.simpleMessage("Connect by ping"),
         "connect_when_prime_vpn_starts": MessageLookupByLibrary.simpleMessage(
             "Connect when Bomber VPN starts"),
         "connection": MessageLookupByLibrary.simpleMessage("Connection"),
         "connection_mode":
             MessageLookupByLibrary.simpleMessage("Connection Mode"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
         "dont_have_an_account":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -51,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
         "forgot_password":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "freemium_locations":
+            MessageLookupByLibrary.simpleMessage("Freemium locations"),
         "get_access_to_unlimited_speed_and_premium_locations":
             MessageLookupByLibrary.simpleMessage(
                 "Get access to unlimited speed and premium locations"),
@@ -70,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please verify your email"),
         "premium_features":
             MessageLookupByLibrary.simpleMessage("Premium features"),
+        "premium_locations":
+            MessageLookupByLibrary.simpleMessage("Premium locations"),
         "remembered_your_password":
             MessageLookupByLibrary.simpleMessage("Remembered your password?"),
         "remove_ads": MessageLookupByLibrary.simpleMessage("Remove Ads"),
@@ -77,7 +84,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "secure": MessageLookupByLibrary.simpleMessage("Secure"),
+        "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "select_location":
+            MessageLookupByLibrary.simpleMessage("SELECT LOCATION"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "server_not_connected":
+            MessageLookupByLibrary.simpleMessage("Server not connected"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "seven_days":
             MessageLookupByLibrary.simpleMessage("7-day free trial. Then 9.99"),
@@ -87,6 +99,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sign_up_with_a_different_email": MessageLookupByLibrary.simpleMessage(
             "Sign up with a different email"),
+        "status_connected":
+            MessageLookupByLibrary.simpleMessage("Status: connected"),
+        "status_not_connected":
+            MessageLookupByLibrary.simpleMessage("Status: not connected"),
         "terms_of_service": MessageLookupByLibrary.simpleMessage(
             "Terms of Service & Privacy Policy"),
         "this_information_is_only_available_on_your_device":

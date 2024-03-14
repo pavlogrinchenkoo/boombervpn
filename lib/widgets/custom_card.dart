@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vpn/generated/assets.gen.dart';
+import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/spaces.dart';
 
@@ -8,12 +9,13 @@ class CustomCard extends StatelessWidget {
   final String? title;
   final String? image;
   final String? status;
-  final String? ip;
+  final String ip;
   final bool isConnected;
-  const CustomCard({super.key, this.onTap, this.title, this.image, this.status, this.ip, required this.isConnected });
+  const CustomCard({super.key, this.onTap, this.title, this.image, this.status, required this.ip, required this.isConnected });
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return InkWell(
       onTap: onTap,
       borderRadius: BRadius.r18,
@@ -32,18 +34,19 @@ class CustomCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                 isConnected ? 'Status: connected' : 'Status: not connected',
+                 isConnected ? s.status_connected : s.status_not_connected,
                   style: BS.bold12,
                 ),
                 Text(
-                  'IP: 0.0.0.0 ${title ?? ''}',
+                  (ip.isNotEmpty) ?
+                  'IP: ${ip ?? ''} ${title ?? ''}' : title ?? '',
                   style: BS.bold12,
                 ),
               ],
             ),
             const Spacer(),
             Text(
-              'SELECT LOCATION',
+              s.select_location,
               style: BS.bold12,
               textAlign: TextAlign.end,
             ),
@@ -69,6 +72,7 @@ class CustomCardLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return InkWell(
       onTap: onTap,
       borderRadius: BRadius.r18,
@@ -85,12 +89,12 @@ class CustomCardLocation extends StatelessWidget {
             ),
             Space.w8,
             Text(
-              title ?? 'Status: not connected',
+              title ?? s.status_not_connected,
               style: BS.bold12,
             ),
             const Spacer(),
             Text(
-              'Select',
+              s.select,
               style: BS.bold12,
               textAlign: TextAlign.end,
             ),

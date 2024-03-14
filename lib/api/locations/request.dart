@@ -56,6 +56,19 @@ class LocationsApi {
       rethrow;
     }
   }
+
+  Future<String> getIp() async {
+    const url = 'https://jsonip.com';
+    try {
+      Response response = await dio.get(
+        url,
+      );
+     return response.data['ip'];
+    } catch (error) {
+      print('Error: $error');
+      rethrow;
+    }
+  }
 }
 
 class Network {
@@ -95,4 +108,6 @@ class Network {
     else
       return 'No Data';
   }
+
+
 }

@@ -46,5 +46,14 @@
   "try_premium_free": "TRY PREMIUM FREE",
   "seven_days": "7-day free trial. Then 9.99",
   "logout": "Logout",
+  "freemium_locations": "Freemium locations",
+  "premium_locations": "Premium locations",
+  "connect_by_ping": "Connect by ping",
+  "disconnect": "Disconnect",
+  "status_connected": "Status: connected",
+  "status_not_connected": "Status: not connected",
+  "select_location": "SELECT LOCATION",
+  "select": "Select",
+  "server_not_connected": "Server not connected",
   "Send": "Send"
 }

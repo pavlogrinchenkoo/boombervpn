@@ -4,6 +4,7 @@ import 'package:openvpn_sf_flutter/openvpn_flutter.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/generated/assets.gen.dart';
+import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/main.dart';
 import 'package:vpn/screens/home_page/widgets/map_animation.dart';
 import 'package:vpn/style.dart';
@@ -100,6 +101,7 @@ class _HomePageState extends State<HomePage> {
                             title: state.server?.code,
                             image: state.server?.flag,
                             isConnected: state.isConnected,
+                            ip: state.ip ,
                           ),
                         ),
                       ),
@@ -141,6 +143,7 @@ class _MainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return Container(
       height: 148,
       width: 148,
@@ -158,9 +161,8 @@ class _MainButton extends StatelessWidget {
           children: [
             Assets.icons.group1.svg(),
             Space.h16,
-            // TODO все текста повинні бути в локалізаціїї
             Text(
-              isConnected ? 'Disconnect' : 'Connect by ping',
+              isConnected ? s.disconnect : s.connect_by_ping,
               style: BS.bold12,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,

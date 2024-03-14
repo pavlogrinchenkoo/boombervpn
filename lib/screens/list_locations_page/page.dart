@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/generated/assets.gen.dart';
+import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
 import 'package:vpn/utils/spaces.dart';
@@ -31,9 +32,11 @@ class _ListLocationsPageState extends State<ListLocationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return CustomStreamBuilder(
         bloc: bloc,
         builder: (context, ScreenState state) {
+
           return CustomScaffold(
               showGoPro: 'yellow',
               body: !(state.loading)
@@ -42,7 +45,7 @@ class _ListLocationsPageState extends State<ListLocationsPage> {
                   : ListView(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       children: [
-                        Text('Freemium locations:', style: BS.bold12),
+                        Text('${s.freemium_locations}:', style: BS.bold12),
                         Space.h8,
                         Column(
                           children: [
@@ -63,7 +66,7 @@ class _ListLocationsPageState extends State<ListLocationsPage> {
                               height: 24,
                             ),
                             Space.w8,
-                            Text('Premium locations:', style: BS.bold12),
+                            Text('${s.premium_locations}:', style: BS.bold12),
                           ],
                         ),
                         Space.h8,
