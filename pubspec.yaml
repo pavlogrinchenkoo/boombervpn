@@ -29,6 +29,7 @@ dependencies:
   openvpn_sf_flutter: ^2.0.0
   flutter_local_notifications: ^16.3.2
   permission_handler: ^11.3.0
+  pulsator: ^1.0.0
 
 dev_dependencies:
   flutter_test:

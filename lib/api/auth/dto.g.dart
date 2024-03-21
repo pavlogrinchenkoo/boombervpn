@@ -61,6 +61,9 @@ UserResponseModel _$UserResponseModelFromJson(Map<String, dynamic> json) =>
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       ip: json['ip'] as String?,
+      geoInfo: json['geo_info'] == null
+          ? null
+          : GeoInfo.fromJson(json['geo_info'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserResponseModelToJson(UserResponseModel instance) =>
@@ -69,6 +72,7 @@ Map<String, dynamic> _$UserResponseModelToJson(UserResponseModel instance) =>
       'session': instance.session,
       'user': instance.user,
       'ip': instance.ip,
+      'geo_info': instance.geoInfo,
     };
 
 Session _$SessionFromJson(Map<String, dynamic> json) => Session(
@@ -108,4 +112,18 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'time': instance.time,
       'date': instance.date?.toIso8601String(),
       'auth_via': instance.authVia,
+    };
+
+GeoInfo _$GeoInfoFromJson(Map<String, dynamic> json) => GeoInfo(
+      ip: json['ip'] as String?,
+      countryName: json['country_name'] as String?,
+      stateProv: json['state_prov'] as String?,
+      isp: json['isp'] as String?,
+    );
+
+Map<String, dynamic> _$GeoInfoToJson(GeoInfo instance) => <String, dynamic>{
+      'ip': instance.ip,
+      'country_name': instance.countryName,
+      'state_prov': instance.stateProv,
+      'isp': instance.isp,
     };

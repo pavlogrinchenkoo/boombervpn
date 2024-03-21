@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:openvpn_sf_flutter/openvpn_flutter.dart';
+import 'package:pulsator/pulsator.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/generated/assets.gen.dart';
 import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/main.dart';
 import 'package:vpn/screens/home_page/widgets/map_animation.dart';
+import 'package:vpn/screens/home_page/widgets/pulsation_dot.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
 import 'package:vpn/utils/spaces.dart';
@@ -31,6 +34,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   VpnStatus? status;
   VPNStage? stage;
+
 
   @override
   void initState() {
@@ -112,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: _MainButton(
+                            isStartAnimation: state.isShowAnimation ?? false,
                             isConnected: state.isConnected,
                             onTap: () {
                               if (!(state.isConnected)) {
@@ -135,42 +140,93 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _MainButton extends StatelessWidget {
+class _MainButton extends StatefulWidget {
   final bool isConnected;
+  final bool isStartAnimation;
   final Function()? onTap;
 
-  const _MainButton({super.key, this.onTap, this.isConnected = false});
+  const _MainButton({super.key, this.onTap, this.isConnected = false, required this.isStartAnimation});
+
+  @override
+  State<_MainButton> createState() => _MainButtonState();
+}
+
+
+
+class _MainButtonState extends State<_MainButton> with SingleTickerProviderStateMixin {
+
+  @override
+  void initState() {
+    homeBloc.initController(
+        AnimationController(
+          duration: const Duration(seconds: 1),
+          vsync: this,)
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    return Container(
-      height: 148,
-      width: 148,
-      decoration: BoxDecoration(
-        color: BC.darkGrey,
-        shape: BoxShape.circle,
-      ),
-      child: InkWell(
-        onTap: onTap,
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        borderRadius: BorderRadius.circular(148),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Assets.icons.group1.svg(),
-            Space.h16,
-            Text(
-              isConnected ? s.disconnect : s.connect_by_ping,
-              style: BS.bold12,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ],
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: 152,
+          width: 152,
+          decoration: BoxDecoration(
+            color: BC.purple,
+            shape: BoxShape.circle,
+          ),
         ),
-      ),
+        RotationTransition(
+          turns: Tween(begin: 0.0, end: 1.0).animate(homeBloc.buttonController),
+          child: AnimatedOpacity(
+            duration: BDuration.d200,
+            opacity: homeBloc.buttonController.isAnimating  ? 1 : 0,
+            child: Container(
+              height: 152,
+              width: 152,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [BC.purple, BC.braun],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: 148,
+          width: 148,
+          decoration: BoxDecoration(
+            color: BC.darkGrey,
+            shape: BoxShape.circle,
+          ),
+          child: InkWell(
+            onTap: () => widget.onTap?.call(),
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            borderRadius: BorderRadius.circular(148),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Assets.icons.group1.svg(),
+                Space.h16,
+                Text(
+                  widget.isConnected ? s.disconnect : s.connect_by_ping,
+                  style: BS.bold12,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

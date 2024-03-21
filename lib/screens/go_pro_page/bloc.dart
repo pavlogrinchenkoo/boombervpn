@@ -4,8 +4,7 @@ import 'package:vpn/api/cache.dart';
 import 'package:vpn/routers/routes.dart';
 import 'package:vpn/screens/profile_page/page.dart';
 import 'package:vpn/utils/bloc_base.dart';
-
-// TODO удолить не исп импорті
+import 'package:vpn/widgets/custom_scaffold.dart';
 
 class GoProBloc extends BlocBaseWithState<ScreenState> {
   @override
@@ -21,6 +20,7 @@ class GoProBloc extends BlocBaseWithState<ScreenState> {
 
   void subscribe(BuildContext context) async {
     cache.saveSubscribe(true);
+    scaffoldBloc.init();
     blocProfile.init();
     if (context.mounted) {
       context.router.push(const HomeRoute());

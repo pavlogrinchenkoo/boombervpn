@@ -14,6 +14,7 @@ import 'package:vpn/screens/home_page/page.dart';
 import 'package:vpn/utils/bloc_base.dart';
 import 'package:vpn/utils/math.dart';
 import 'widgets/map_animation.dart';
+import 'widgets/pulsation_dot.dart';
 
 class HomeBloc extends BlocBaseWithState<ScreenState> {
   @override
@@ -21,9 +22,14 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
 
   LocationsApi locationsApi = LocationsApi();
   Cache cache = Cache();
+  late AnimationController buttonController;
 
   HomeBloc() {
     setState(ScreenState());
+  }
+
+  void initController(AnimationController animationController) {
+    buttonController = animationController;
   }
 
   void init(BuildContext context) async {
@@ -71,6 +77,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
 
   void connected(BuildContext context, Server server) async {
     try {
+      homeBloc.buttonController.repeat();
       final user = await cache.getUser();
       final data = ConnectResponseModel(
         userId: user?.userId,
@@ -89,6 +96,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       final getIp = await locationsApi.getIp();
       setState(currentState.copyWith(isConnected: true, ip: getIp));
     } on Exception catch (e) {
+      buttonController.reset();
       final notification = await cache.getShowNotification();
       if (notification) {
         if (context.mounted) showNotification(context);
@@ -99,6 +107,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
   Future<void> initPlatformState(
       {BuildContext? context, String? config}) async {
     try {
+
       String base64EncodedCertificate = config ?? '';
       List<int> bytes = base64.decode(base64EncodedCertificate);
       String certificate = utf8.decode(bytes);
@@ -133,13 +142,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     List<Model> newData = [
       Model(getLocation.latitude, getLocation.longitude,
           const Icon(Icons.person, color: Colors.transparent)),
-      Model(
-          server.latitude ?? 1,
-          server.longitude ?? 1,
-          const Icon(
-            Icons.location_on_sharp,
-            color: Colors.white,
-          )),
+      Model(server.latitude ?? 1, server.longitude ?? 1, const Pulsat()),
     ];
 
     // точки для маркерів
@@ -153,15 +156,17 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       controller.insertMarker(0);
     }
     // анімація для труби
+    await Future.delayed(const Duration(seconds: 1));
     arcPoint = DataModel(MapLatLng(getLocation.latitude, getLocation.longitude),
         MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
     setState(currentState.copyWith(isShowMarker: true));
-    await Future.delayed(const Duration(seconds: 1));
     animationController.forward(from: 0);
-    await Future.delayed(const Duration(seconds: 4));
-    setState(currentState.copyWith(isShowAnimation: true));
-    await Future.delayed(const Duration(seconds: 3));
-    animationGreenLineController.forward(from: 0);
+    // await Future.delayed(const Duration(seconds: 4));
+    // setState(currentState.copyWith(isShowAnimation: true));
+    // await Future.delayed(const Duration(seconds: 3));
+    // animationGreenLineController.forward(from: 0);
+    await Future.delayed(const Duration(seconds: 1));
+    buttonController.reset();
   }
 
   Future<void> showNotification(BuildContext context) async {
@@ -277,4 +282,4 @@ class ScreenState {
         latLng: latLng ?? this.latLng,
         ip: ip ?? this.ip);
   }
-  }
+}

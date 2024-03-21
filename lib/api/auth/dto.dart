@@ -13,11 +13,11 @@ class SignUpModel {
   final String? gRecaptchaResponse;
 
   SignUpModel(
-      { this.lang,
-        this.email,
-        this.password,
-        this.passwordReEntrered,
-        this.gRecaptchaResponse});
+      {this.lang,
+      this.email,
+      this.password,
+      this.passwordReEntrered,
+      this.gRecaptchaResponse});
 
   factory SignUpModel.fromJson(Map<String, dynamic> json) =>
       _$SignUpModelFromJson(json);
@@ -69,12 +69,15 @@ class UserResponseModel {
   final Session? session;
   final User? user;
   final String? ip;
+  @JsonKey(name: 'geo_info')
+  final GeoInfo? geoInfo;
 
   UserResponseModel({
     this.status,
     this.session,
     this.user,
     this.ip,
+    this.geoInfo,
   });
 
   factory UserResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -110,7 +113,7 @@ class User {
   final String? submitToken;
   final String? blocked;
   @JsonKey(name: 'account_type')
-  final String?accountType;
+  final String? accountType;
   final String? time;
   final DateTime? date;
   @JsonKey(name: 'auth_via')
@@ -130,8 +133,25 @@ class User {
     this.authVia,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) =>
-      _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+}
+
+@JsonSerializable()
+class GeoInfo {
+  final String? ip;
+  @JsonKey(name: 'country_name')
+  final String? countryName;
+  @JsonKey(name: 'state_prov')
+  final String? stateProv;
+  @JsonKey(name: 'isp')
+  final String? isp;
+
+  GeoInfo({this.ip, this.countryName, this.stateProv, this.isp});
+
+  factory GeoInfo.fromJson(Map<String, dynamic> json) =>
+      _$GeoInfoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GeoInfoToJson(this);
 }

@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pulsator/pulsator.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/style.dart';
+
+import 'pulsation_dot.dart';
 
 late DataModel arcPoint;
 late List<MapLatLng> markerData;
@@ -45,9 +49,11 @@ class _MapAnimationState extends State<MapAnimation>
   void init() {
     controller = MapShapeLayerController();
     data = <Model>[
-          Model(widget.getLocation.latitude, widget.getLocation.longitude,
-              const Icon(Icons.person, color: Colors.white))
-
+      Model(
+          widget.getLocation.latitude,
+          widget.getLocation.longitude,
+          const Pulsat()
+          )
     ];
     zoomPanBehavior = MapZoomPanBehavior(
       enablePanning: false,
@@ -58,11 +64,10 @@ class _MapAnimationState extends State<MapAnimation>
     dataSource = const MapShapeSource.asset(
       'assets/world_map.json',
       // shapeDataField: 'continent',
-
     );
 
     animationController = AnimationController(
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
 
@@ -116,6 +121,7 @@ class _MapAnimationState extends State<MapAnimation>
                       ))),
             );
           },
+
           sublayers: widget.isShowMarker
               ? [
                   MapArcLayer(
@@ -123,30 +129,11 @@ class _MapAnimationState extends State<MapAnimation>
                       MapArc(
                         from: arcPoint.from,
                         to: arcPoint.to,
-                        color: widget.isShowAnimation
-                            ? BC.black.withOpacity(0.5)
-                            : BC.black.withOpacity(0.5),
-                        width: 10,
-                        heightFactor: 0,
+                        color: BC.purple,
+                        width: 2,
+                        heightFactor: 0.5,
                         controlPointFactor: 0.5,
-                      ),
-                      MapArc(
-                        from: arcPoint.from,
-                        to: arcPoint.to,
-                        color: widget.isShowAnimation ? BC.purple : BC.purple,
-                        width: 10,
-                        heightFactor: 0,
-                        controlPointFactor: 0.5,
-                        dashArray: [2, 30],
-                      ),
-                      MapArc(
-                        from: arcPoint.from,
-                        to: arcPoint.to,
-                        color: Colors.transparent,
-                        width: 10,
-                        heightFactor: 0,
-                        controlPointFactor: 0.5,
-                        dashArray: [2, 30],
+                        dashArray: const <double>[5, 8],
                       ),
                     },
                     animation: animation,
@@ -171,5 +158,6 @@ class Model {
 
   final double latitude;
   final double longitude;
-  Icon icon;
+  Widget icon;
 }
+

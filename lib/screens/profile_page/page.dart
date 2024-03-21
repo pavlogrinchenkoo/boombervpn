@@ -56,18 +56,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                   name: s.email,
                                   description: state.user?.user?.email,
                                 ),
-                                // _CustomText(
-                                //   name: s.country,
-                                //   description: state.user?.user?.admin,
-                                // ),
-                                // _CustomText(
-                                //   name: s.city,
-                                //   description: 'UserEmail',
-                                // ),
-                                // const _CustomText(
-                                //   name: 'ISP',
-                                //   description: 'UserEmail',
-                                // ),
+                                _CustomText(
+                                  name: s.country,
+                                  description: state.user?.geoInfo?.countryName,
+                                ),
+                                _CustomText(
+                                  name: s.city,
+                                  description: state.user?.geoInfo?.stateProv,
+                                ),
+                                 _CustomText(
+                                  name: 'ISP',
+                                  description: state.user?.geoInfo?.isp,
+                                ),
                                 _CustomText(
                                   name: 'IP',
                                   description: state.user?.ip,
@@ -167,13 +167,16 @@ class GradientText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: style.copyWith(
-          foreground: Paint()
-            ..shader =
-                gradient.createShader(const Rect.fromLTRB(0, 0, 350, 200))),
-      textAlign: TextAlign.center,
+    return SizedBox(
+      width: 350,
+      child: Text(
+        text,
+        style: style.copyWith(
+            foreground: Paint()
+              ..shader =
+                  gradient.createShader(const Rect.fromLTRB(0, 0, 350, 0))),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
