@@ -135,7 +135,8 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     engine.disconnect();
     setState(currentState.copyWith(
         isConnected: false, isShowAnimation: false, isShowMarker: false));
-    final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1, const Animation2());
+    final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1,
+        const Animation2());
     controller.removeMarkerAt(1);
     data.removeAt(1);
     data.insert(0, model);
@@ -145,7 +146,9 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
 
   void setMarker(MapLatLng latLng) async {
     await Future.delayed(const Duration(seconds: 3));
-    final model = Model(latLng.latitude ?? 1, latLng.longitude ?? 1,
+    final model = Model(
+        latLng.latitude ?? 1,
+        latLng.longitude ?? 1,
         Center(
           child: Assets.icons.burrow001.svg(
             width: 20,
@@ -168,7 +171,6 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     controller.insertMarker(0);
     // setMarker(getLocation);
     zoomPanBehavior
-
       ..zoomLevel = calculateZoomLevel(calculateDistance(
         getLocation.latitude,
         getLocation.longitude,
@@ -177,12 +179,6 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       ))
       ..focalLatLng = midPoint(server.latitude ?? 1, server.longitude ?? 1,
           getLocation.latitude, getLocation.longitude);
-
-    final newMarker =
-        Model(server.latitude ?? 1, server.longitude ?? 1, const Animation1());
-    data.insert(1, newMarker);
-    controller.insertMarker(1);
-    setNewMarker(MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
     // анімація для труби
     await Future.delayed(const Duration(seconds: 1));
     arcPoint = DataModel(MapLatLng(getLocation.latitude, getLocation.longitude),
@@ -190,13 +186,19 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     setState(currentState.copyWith(isShowMarker: true));
     animationController.forward(from: 0);
     await Future.delayed(const Duration(seconds: 1));
+    final newMarker =
+        Model(server.latitude ?? 1, server.longitude ?? 1, const Animation1());
+    data.insert(1, newMarker);
+    controller.insertMarker(1);
+    setNewMarker(MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
+    await Future.delayed(const Duration(seconds: 1));
     buttonController.reset();
   }
 
   void setNewMarker(MapLatLng latLng) async {
     await Future.delayed(const Duration(seconds: 2));
-    final model = Model(latLng.latitude ?? 1, latLng.longitude ?? 1,
-        const Animation2());
+    final model =
+        Model(latLng.latitude ?? 1, latLng.longitude ?? 1, const Animation2());
     data.remove(data[1]);
     data.insert(1, model);
     controller.removeMarkerAt(1);
