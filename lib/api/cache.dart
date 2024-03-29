@@ -112,6 +112,11 @@ class Cache {
     await prefs.setString('location', string);
   }
 
+  Future<void> removeLocation() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('location');
+  }
+
   Future<MapLatLng> getLocation() async {
     final prefs = await SharedPreferences.getInstance();
     final stringLocation = prefs.getString('location');

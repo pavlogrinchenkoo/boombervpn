@@ -28,6 +28,7 @@ class SplashBloc extends BlocBaseWithState<ScreenState> {
       if (context.mounted) context.router.replaceAll([const AuthRoute()]);
     }
     final firstLaunch = await cache.getFirstLaunch();
+    // cache.removeLocation();
     if (!firstLaunch) {
       getCountry();
       cache.saveFirstLaunch(true);

@@ -11,6 +11,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAnimationsGen {
+  const $AssetsAnimationsGen();
+
+  /// File path: assets/animations/VPN_1.json
+  String get vpn1 => 'assets/animations/VPN_1.json';
+
+  /// File path: assets/animations/VPN_2.json
+  String get vpn2 => 'assets/animations/VPN_2.json';
+
+  /// File path: assets/animations/VPN_3.json
+  String get vpn3 => 'assets/animations/VPN_3.json';
+
+  /// List of all assets
+  List<String> get values => [vpn1, vpn2, vpn3];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -29,8 +45,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/add.svg
   SvgGenImage get add => const SvgGenImage('assets/icons/add.svg');
 
+  /// File path: assets/icons/burrow_001.svg
+  SvgGenImage get burrow001 => const SvgGenImage('assets/icons/burrow_001.svg');
+
   /// File path: assets/icons/incognito.svg
   SvgGenImage get incognito => const SvgGenImage('assets/icons/incognito.svg');
+
+  /// File path: assets/icons/line.svg
+  SvgGenImage get line => const SvgGenImage('assets/icons/line.svg');
 
   /// File path: assets/icons/premium.svg
   SvgGenImage get premium => const SvgGenImage('assets/icons/premium.svg');
@@ -61,7 +83,9 @@ class $AssetsIconsGen {
         signal1,
         vector,
         add,
+        burrow001,
         incognito,
+        line,
         premium,
         pro,
         proYelov,
@@ -103,6 +127,7 @@ class $AssetsWebpagesGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsWebpagesGen webpages = $AssetsWebpagesGen();

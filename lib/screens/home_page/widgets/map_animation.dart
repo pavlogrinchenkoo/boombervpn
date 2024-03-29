@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pulsator/pulsator.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/locations/dto.dart';
+import 'package:vpn/screens/home_page/page.dart';
 import 'package:vpn/style.dart';
 
 import 'pulsation_dot.dart';
@@ -52,9 +53,10 @@ class _MapAnimationState extends State<MapAnimation>
       Model(
           widget.getLocation.latitude,
           widget.getLocation.longitude,
-          const Pulsat()
+          const Animation1()
           )
     ];
+    homeBloc.initMap();
     zoomPanBehavior = MapZoomPanBehavior(
       enablePanning: false,
       enablePinching: false,

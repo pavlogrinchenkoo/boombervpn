@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/cache.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/api/locations/request.dart';
+import 'package:vpn/generated/assets.gen.dart';
 import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/main.dart';
 import 'package:vpn/routers/routes.dart';
@@ -66,6 +67,17 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     }
   }
 
+  void initMap() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final getLocation = currentState.latLng!;
+    final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1,
+        const Animation2());
+    data.add(model);
+    data.remove(data[0]);
+    controller.clearMarkers();
+    controller.insertMarker(0);
+  }
+
   void selectServer(Server server) async {
     setState(currentState.copyWith(server: server, loading: true));
     cache.saveServer(server);
@@ -107,7 +119,6 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
   Future<void> initPlatformState(
       {BuildContext? context, String? config}) async {
     try {
-
       String base64EncodedCertificate = config ?? '';
       List<int> bytes = base64.decode(base64EncodedCertificate);
       String certificate = utf8.decode(bytes);
@@ -119,17 +130,45 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     }
   }
 
-  void disconnect() {
+  void disconnect() async {
+    final getLocation = await cache.getLocation();
     engine.disconnect();
     setState(currentState.copyWith(
         isConnected: false, isShowAnimation: false, isShowMarker: false));
+    final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1, const Animation2());
     controller.removeMarkerAt(1);
     data.removeAt(1);
+    data.insert(0, model);
+    controller.clearMarkers();
+    controller.insertMarker(0);
+  }
+
+  void setMarker(MapLatLng latLng) async {
+    await Future.delayed(const Duration(seconds: 3));
+    final model = Model(latLng.latitude ?? 1, latLng.longitude ?? 1,
+        Center(
+          child: Assets.icons.burrow001.svg(
+            width: 20,
+            height: 20,
+          ),
+        ));
+    data.remove(data[0]);
+    data.insert(0, model);
+    controller.removeMarkerAt(0);
+    controller.insertMarker(0);
   }
 
   void startAnimation(Server server) async {
     final getLocation = await cache.getLocation();
+    final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1,
+        const Animation3());
+    data.clear();
+    data.add(model);
+    controller.clearMarkers();
+    controller.insertMarker(0);
+    // setMarker(getLocation);
     zoomPanBehavior
+
       ..zoomLevel = calculateZoomLevel(calculateDistance(
         getLocation.latitude,
         getLocation.longitude,
@@ -139,34 +178,29 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       ..focalLatLng = midPoint(server.latitude ?? 1, server.longitude ?? 1,
           getLocation.latitude, getLocation.longitude);
 
-    List<Model> newData = [
-      Model(getLocation.latitude, getLocation.longitude,
-          const Icon(Icons.person, color: Colors.transparent)),
-      Model(server.latitude ?? 1, server.longitude ?? 1, const Pulsat()),
-    ];
-
-    // точки для маркерів
-
-    int length = data.length;
-    data.add(newData[1]);
-    length = data.length;
-    if (length > 1) {
-      controller.insertMarker(length - 1);
-    } else {
-      controller.insertMarker(0);
-    }
+    final newMarker =
+        Model(server.latitude ?? 1, server.longitude ?? 1, const Animation1());
+    data.insert(1, newMarker);
+    controller.insertMarker(1);
+    setNewMarker(MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
     // анімація для труби
     await Future.delayed(const Duration(seconds: 1));
     arcPoint = DataModel(MapLatLng(getLocation.latitude, getLocation.longitude),
         MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
     setState(currentState.copyWith(isShowMarker: true));
     animationController.forward(from: 0);
-    // await Future.delayed(const Duration(seconds: 4));
-    // setState(currentState.copyWith(isShowAnimation: true));
-    // await Future.delayed(const Duration(seconds: 3));
-    // animationGreenLineController.forward(from: 0);
     await Future.delayed(const Duration(seconds: 1));
     buttonController.reset();
+  }
+
+  void setNewMarker(MapLatLng latLng) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final model = Model(latLng.latitude ?? 1, latLng.longitude ?? 1,
+        const Animation2());
+    data.remove(data[1]);
+    data.insert(1, model);
+    controller.removeMarkerAt(1);
+    controller.insertMarker(1);
   }
 
   Future<void> showNotification(BuildContext context) async {
