@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:pulsator/pulsator.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
-import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/screens/home_page/page.dart';
 import 'package:vpn/style.dart';
 
@@ -24,12 +24,14 @@ class MapAnimation extends StatefulWidget {
   final MapLatLng getLocation;
   final bool isShowMarker;
   final bool isShowAnimation;
+  final PictureInfo pictureInfo;
 
   const MapAnimation({
     super.key,
     required this.isShowMarker,
     required this.isShowAnimation,
     required this.getLocation,
+    required this.pictureInfo,
   });
 
   @override
@@ -40,6 +42,8 @@ class _MapAnimationState extends State<MapAnimation>
     with TickerProviderStateMixin {
   Timer? timer;
   double longitude = 0;
+  late double fr;
+  late double sr;
 
   @override
   void initState() {
@@ -50,11 +54,8 @@ class _MapAnimationState extends State<MapAnimation>
   void init() {
     controller = MapShapeLayerController();
     data = <Model>[
-      Model(
-          widget.getLocation.latitude,
-          widget.getLocation.longitude,
-          const Animation1()
-          )
+      Model(widget.getLocation.latitude, widget.getLocation.longitude,
+          const Animation1())
     ];
     homeBloc.initMap();
     zoomPanBehavior = MapZoomPanBehavior(
@@ -123,20 +124,21 @@ class _MapAnimationState extends State<MapAnimation>
                       ))),
             );
           },
-
           sublayers: widget.isShowMarker
               ? [
                   MapArcLayer(
                     arcs: {
                       MapArc(
-                        from: arcPoint.from,
-                        to: arcPoint.to,
-                        color: BC.purple,
-                        width: 8,
-                        heightFactor: 0,
-                      ),
+                          from: arcPoint.from,
+                          to: arcPoint.to,
+                          color: BC.purple,
+                          width: 8,
+                          heightFactor: 0,
+                          root: widget.pictureInfo),
                     },
                     animation: animation,
+                    fr: -2,
+                    sr: -2,
                   ),
                 ]
               : [],
@@ -160,4 +162,3 @@ class Model {
   final double longitude;
   Widget icon;
 }
-
