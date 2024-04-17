@@ -36,8 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "by_creating_an_account": MessageLookupByLibrary.simpleMessage(
             "By creating an account, you have agree to our"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
-        "connect_by_ping":
-            MessageLookupByLibrary.simpleMessage("Connect by ping"),
+        "connect": MessageLookupByLibrary.simpleMessage("Connect"),
         "connect_when_prime_vpn_starts": MessageLookupByLibrary.simpleMessage(
             "Connect when Bomber VPN starts"),
         "connection": MessageLookupByLibrary.simpleMessage("Connection"),

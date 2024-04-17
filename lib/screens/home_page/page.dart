@@ -222,7 +222,7 @@ class _MainButtonState extends State<_MainButton>
                 Assets.icons.group1.svg(),
                 Space.h16,
                 Text(
-                  widget.isConnected ? s.disconnect : s.connect_by_ping,
+                  widget.isConnected ? s.disconnect : s.connect,
                   style: BS.bold12,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,

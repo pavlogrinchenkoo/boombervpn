@@ -190,7 +190,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
         MapLatLng(server.latitude ?? 1, server.longitude ?? 0));
     setState(currentState.copyWith(isShowMarker: true));
     animationController.forward(from: 0);
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     final newMarker =
         Model(server.latitude ?? 1, server.longitude ?? 1, const Animation1());
     data.insert(1, newMarker);

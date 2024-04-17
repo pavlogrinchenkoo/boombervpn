@@ -48,7 +48,7 @@
   "logout": "Logout",
   "freemium_locations": "Freemium locations",
   "premium_locations": "Premium locations",
-  "connect_by_ping": "Connect by ping",
+  "connect": "Connect",
   "disconnect": "Disconnect",
   "status_connected": "Status: connected",
   "status_not_connected": "Status: not connected",

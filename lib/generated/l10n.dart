@@ -530,11 +530,11 @@ class S {
     );
   }
 
-  /// `Connect by ping`
-  String get connect_by_ping {
+  /// `Connect`
+  String get connect {
     return Intl.message(
-      'Connect by ping',
-      name: 'connect_by_ping',
+      'Connect',
+      name: 'connect',
       desc: '',
       args: [],
     );
