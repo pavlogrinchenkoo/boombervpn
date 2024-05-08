@@ -82,7 +82,7 @@ class _AppState extends State<App> {
       locale: const Locale('en'),
       themeMode: ThemeMode.light,
       theme: ThemeData(
-        scaffoldBackgroundColor: BC.black,
+        scaffoldBackgroundColor: BC.white,
         bottomSheetTheme:
             const BottomSheetThemeData(backgroundColor: Colors.transparent),
       ),

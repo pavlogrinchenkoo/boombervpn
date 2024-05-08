@@ -16,7 +16,7 @@ class PhonePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = S.of(context);
     return Scaffold(
-      backgroundColor: BC.black,
+      backgroundColor: BC.white,
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
@@ -28,7 +28,7 @@ class PhonePage extends StatelessWidget {
                   onPressed: () => context.router.pop(),
                   icon: Icon(
                     Icons.close,
-                    color: BC.white,
+                    color: BC.black,
                   ))
             ],
           ),

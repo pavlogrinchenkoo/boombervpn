@@ -49,7 +49,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                   Space.h32,
                   Text(s.remembered_your_password,
-                      style: BS.reg13.apply(color: BC.white)),
+                      style: BS.reg13.apply(color: BC.green1)),
                   Space.h8,
                   CustomTextButton(
                     onTap: () => bloc.goBack(context),

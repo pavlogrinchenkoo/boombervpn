@@ -46,7 +46,7 @@ class CustomBuyButton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                 decoration: BoxDecoration(
                   borderRadius: BRadius.r20,
-                  color: BC.white,
+                  color: BC.black,
                 ),
                 child: Text(
                   discount ?? '',

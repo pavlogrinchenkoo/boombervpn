@@ -22,7 +22,7 @@ class SignUpBloc extends BlocBaseWithState<ScreenState> {
   void showDialogRecaptcha(BuildContext context, String email, String password,
       SignUpBloc bloc) async {
     if (email.isNotEmpty || password.isNotEmpty) {
-      if (password.length <= 8) {
+      if (password.length < 8) {
         SnackBarService.showSnackBar(
             context, 'Password must be more than 8 characters', true);
       } else {

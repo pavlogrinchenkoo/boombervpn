@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('${s.dont_have_an_account} ',
-                        style: BS.reg13.apply(color: BC.white)),
+                        style: BS.reg13.apply(color: BC.green1)),
                     CustomTextButton(
                       onTap: () => bloc.goSignUp(context),
                       text: s.Create_an_account,

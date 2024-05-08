@@ -35,6 +35,7 @@ class _AuthPageState extends State<AuthPage> {
         bloc: bloc,
         builder: (context, state) {
           return CustomScaffold(
+            backgroundColor: BC.blue1,
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

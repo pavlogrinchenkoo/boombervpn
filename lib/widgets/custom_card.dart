@@ -27,7 +27,7 @@ class CustomCard extends StatelessWidget {
             Container(
               width: 28,
               height: 28,
-              decoration: BoxDecoration(color: BC.white, shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(image ?? ''), fit: BoxFit.fill)),
+              decoration: BoxDecoration(color: BC.black, shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(image ?? ''), fit: BoxFit.fill)),
             ),
             Space.w8,
             Column(
@@ -54,7 +54,7 @@ class CustomCard extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
-              color: BC.white,
+              color: BC.black,
             ),
           ],
         ),
@@ -85,7 +85,7 @@ class CustomCardLocation extends StatelessWidget {
             Container(
               width: 28,
               height: 28,
-              decoration: BoxDecoration(color: BC.white, shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(image ?? 'https://picsum.photos/200/300', ), fit: BoxFit.cover)),
+              decoration: BoxDecoration(color: BC.black, shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(image ?? 'https://picsum.photos/200/300', ), fit: BoxFit.cover)),
             ),
             Space.w8,
             Text(
@@ -104,7 +104,7 @@ class CustomCardLocation extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
-              color: BC.white,
+              color: BC.black,
             ),
           ],
         ),

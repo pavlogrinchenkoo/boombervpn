@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Space.h8,
                                       Icon(
                                         Icons.keyboard_arrow_down,
-                                        color: BC.white,
+                                        color: BC.black,
                                         size: 24,
                                       ),
                                     ],
@@ -149,7 +149,7 @@ class _CustomText extends StatelessWidget {
         Space.h8,
         Container(
           height: 1,
-          color: BC.white,
+          color: BC.black,
         ),
         Space.h10
       ],

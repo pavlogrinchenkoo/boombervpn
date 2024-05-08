@@ -45,6 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Assets.images.map.image(
+                  color: BC.green1,
                   width: 180,
                   height: 110,
                   fit: BoxFit.cover,
@@ -80,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Space.h32,
                 Text(s.by_creating_an_account,
-                    style: BS.reg13.apply(color: BC.white)),
+                    style: BS.reg13.apply(color: BC.green1)),
                 Space.h4,
                 CustomTextButton(
                   onTap: () => bloc.goTerms(context),
@@ -91,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('${s.already_have_an_account} ',
-                        style: BS.reg13.apply(color: BC.white)),
+                        style: BS.reg13.apply(color: BC.green1)),
                     CustomTextButton(
                       onTap: () => bloc.goLogin(context),
                       text: s.log_in,

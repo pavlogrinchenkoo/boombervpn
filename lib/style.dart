@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeColors {
   static const Color green = Color(0xff65C467);
-  static const Color white = Color(0xffFAFAFA);
+  static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff000000);
   static const Color grey = Color(0xffAEAEAE);
   static const Color darkGrey = Color(0xff232026);
@@ -12,12 +12,19 @@ class ThemeColors {
   static const Color yellow = Color(0xffFFD006);
   static const Color blue = Color(0xff123698);
   static const Color lightGreen = Color(0xff4FA6A9);
+  static const Color darkGreen = Color(0xff8EB45C);
+  static const Color lightBlue = Color(0xffD9F4FB);
+  static const Color white1 = Color(0xffFCFCFC);
+  static const Color blue1 = Color(0xffD5F2EA);
+  static const Color green1 = Color(0xff77A049);
+
 }
 
 abstract class BC {
   static Color get green => ThemeColors.green;
-  static Color get white => ThemeColors.white;
   static Color get black => ThemeColors.black;
+  static Color get white => ThemeColors.white1;
+  static Color get white1 => ThemeColors.white;
   static Color get grey => ThemeColors.grey;
   static Color get darkGrey => ThemeColors.darkGrey;
   static Color get lightGrey => ThemeColors.lightGrey;
@@ -26,6 +33,10 @@ abstract class BC {
   static Color get yellow => ThemeColors.yellow;
   static Color get blue => ThemeColors.blue;
   static Color get lightGreen => ThemeColors.lightGreen;
+  static Color get darkGreen => ThemeColors.darkGreen;
+  static Color get lightBlue => ThemeColors.lightBlue;
+  static Color get blue1 => ThemeColors.blue1;
+  static Color get green1 => ThemeColors.green1;
 }
 
 abstract class BS {
@@ -37,7 +48,7 @@ abstract class BS {
     fontWeight: FontWeight.w700,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.green1,
   );
 
   static TextStyle get bold28 => TextStyle(
@@ -46,7 +57,7 @@ abstract class BS {
     fontWeight: FontWeight.w700,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get bold24 => TextStyle(
@@ -55,7 +66,7 @@ abstract class BS {
     fontWeight: FontWeight.w700,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.green1,
   );
 
   static TextStyle get bold16 => TextStyle(
@@ -64,7 +75,7 @@ abstract class BS {
     fontWeight: FontWeight.w700,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get bold12 => TextStyle(
@@ -73,7 +84,7 @@ abstract class BS {
     fontWeight: FontWeight.w700,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get sb15 => TextStyle(
@@ -82,7 +93,7 @@ abstract class BS {
     fontWeight: FontWeight.w600,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.grey,
+    color: BC.white,
   );
 
   static TextStyle get sb14 => TextStyle(
@@ -91,7 +102,7 @@ abstract class BS {
     fontWeight: FontWeight.w600,
     height: 17.0 / 16.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get sb24 => TextStyle(
@@ -100,7 +111,7 @@ abstract class BS {
     fontWeight: FontWeight.w600,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.black,
+    color: BC.white,
   );
 
   static TextStyle get med24 => TextStyle(
@@ -109,7 +120,7 @@ abstract class BS {
     fontWeight: FontWeight.w500,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get med20 => TextStyle(
@@ -118,7 +129,16 @@ abstract class BS {
     fontWeight: FontWeight.w500,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
+  );
+
+  static TextStyle get med13 => TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 13.0,
+    fontWeight: FontWeight.w500,
+    height: 25.0 / 24.0,
+    letterSpacing: -0.02,
+    color: BC.green1,
   );
 
   static TextStyle get med18 => TextStyle(
@@ -127,7 +147,7 @@ abstract class BS {
     fontWeight: FontWeight.w500,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get med16 => TextStyle(
@@ -136,7 +156,7 @@ abstract class BS {
     fontWeight: FontWeight.w500,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get med10 => TextStyle(
@@ -145,7 +165,7 @@ abstract class BS {
     fontWeight: FontWeight.w500,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 // TODO otstup
 
@@ -156,7 +176,7 @@ abstract class BS {
     fontWeight: FontWeight.w400,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get reg15 => TextStyle(
@@ -174,7 +194,7 @@ abstract class BS {
     fontWeight: FontWeight.w400,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.white,
+    color: BC.black,
   );
 
   static TextStyle get reg13 => TextStyle(
@@ -183,7 +203,7 @@ abstract class BS {
     fontWeight: FontWeight.w400,
     height: 16.0 / 16.0,
     letterSpacing: -0.02,
-    color: BC.purple,
+    color: BC.green1,
   );
 
   static TextStyle get reg12 => TextStyle(
@@ -212,7 +232,7 @@ abstract class BRadius {
 abstract class BShadow {
   static List<BoxShadow> get light => [
         BoxShadow(
-            color: BC.green.withOpacity(0.1),
+            color: BC.black.withOpacity(0.07),
             blurRadius: 60,
             offset: const Offset(0, 2))
       ];

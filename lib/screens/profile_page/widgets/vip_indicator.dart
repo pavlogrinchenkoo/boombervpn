@@ -35,7 +35,7 @@ class _VipIndicatorState extends State<VipIndicator>
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: BC.white,
+            color: BC.black,
           ),
           child: Stack(
             children: [

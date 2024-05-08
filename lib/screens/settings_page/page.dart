@@ -33,9 +33,9 @@ class _SettingsPageState extends State<SettingsPage> {
         bloc: bloc,
         builder: (BuildContext context, ScreenState state) {
           return Scaffold(
-            backgroundColor: BC.black,
+            backgroundColor: BC.white,
             appBar: AppBar(
-              backgroundColor: BC.black,
+              backgroundColor: BC.white,
               title: Text(s.logo, style: BS.med20),
               centerTitle: false,
             ),
