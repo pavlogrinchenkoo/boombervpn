@@ -44,6 +44,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
         return Container(
           height: 70,
           padding: const EdgeInsets.only(top: 4, bottom: 4),
+          decoration: BoxDecoration(
+            color: BC.black,
+          ),
           width: double.infinity,
           child: SafeArea(
             child: Row(

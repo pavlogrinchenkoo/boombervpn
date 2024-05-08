@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -68,6 +69,9 @@ class _AppState extends State<App> {
   }
   @override
   Widget build(BuildContext buildContext) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+    ));
     return MaterialApp.router(
       localizationsDelegates: const [
         S.delegate,

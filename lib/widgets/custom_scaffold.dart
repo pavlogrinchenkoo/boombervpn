@@ -14,46 +14,52 @@ class CustomScaffold extends StatelessWidget {
       required this.body,
       this.bottomNavigationBar,
       super.key,
-      this.resizeToAvoidBottomInset, this.showGoPro});
+      this.resizeToAvoidBottomInset,
+      this.showGoPro,
+      this.backgroundColor});
 
   final PreferredSizeWidget? appBar;
   final Widget body;
   final Widget? bottomNavigationBar;
   final bool? resizeToAvoidBottomInset;
   final String? showGoPro;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return CustomStreamBuilder(
-      bloc: scaffoldBloc,
-      builder: ( BuildContext context, ScreenState state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset ?? true,
-          backgroundColor: BC.black,
-          bottomNavigationBar: bottomNavigationBar,
-          body: SafeArea(
-              child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: BC.black,
+        bloc: scaffoldBloc,
+        builder: (BuildContext context, ScreenState state) {
+          return Scaffold(
+            resizeToAvoidBottomInset: resizeToAvoidBottomInset ?? true,
+            backgroundColor: backgroundColor ?? BC.black,
+            bottomNavigationBar: bottomNavigationBar,
+            body: SafeArea(
+                child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: BC.black,
+                  ),
+                  child: Row(
+                    children: [
+                      Text('Bomber VPN', style: BS.bold24),
+                      const Spacer(),
+                      if (showGoPro != null)
+                        InkWell(
+                            onTap: () =>
+                                context.router.push(const GoProRoute()),
+                            child: (state.isVip)
+                                ? Assets.icons.pro.svg()
+                                : Assets.icons.proYelov.svg()),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  children: [
-                    Text('Bomber VPN', style: BS.bold24),
-                    const Spacer(),
-                   if(showGoPro != null) InkWell(
-                        onTap: () => context.router.push(const GoProRoute()),
-                        child: (state.isVip) ? Assets.icons.pro.svg() : Assets.icons.proYelov.svg()),
-                  ],
-                ),
-              ),
-              Expanded(child: body),
-            ],
-          )),
-        );
-      }
-    );
+                Expanded(child: body),
+              ],
+            )),
+          );
+        });
   }
 }

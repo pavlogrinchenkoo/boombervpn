@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, ScreenState state) {
           return CustomScaffold(
             showGoPro: 'blue',
+            backgroundColor: Color(0xFFA7E1E3),
             body: !(state.loading)
                 ? const CustomIndicator()
                 : Stack(
@@ -340,7 +341,7 @@ class CurvePainter extends CustomPainter {
     Offset startPoint = Offset(300, 300);
     Offset endPoint = Offset(50, 50);
     int humps =
-    startPoint.dx > endPoint.dx ? endPoint.dx ~/ 4 : startPoint.dx ~/ 4;
+        startPoint.dx > endPoint.dx ? endPoint.dx ~/ 4 : startPoint.dx ~/ 4;
 
     path.moveTo(startPoint.dx, startPoint.dy);
 
@@ -355,7 +356,7 @@ class CurvePainter extends CustomPainter {
     for (int i = 1; i <= humps * 2; i++) {
       double t = i / (humps * 2);
       double x = startPoint.dx + dx * t;
-      double y = (startPoint.dy+10) + dy * t;
+      double y = (startPoint.dy + 10) + dy * t;
       if (i % 2 == 0) {
         y += sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
       } else {
