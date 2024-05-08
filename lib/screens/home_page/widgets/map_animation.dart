@@ -151,7 +151,7 @@ class _MapAnimationState extends State<MapAnimation>
                         MapArc(
                             from: arcPoint.from,
                             to: arcPoint.to,
-                            color: BC.purple,
+                            color: BC.green1,
                             width: 8,
                             heightFactor: 0,
                             root: widget.pictureInfo),

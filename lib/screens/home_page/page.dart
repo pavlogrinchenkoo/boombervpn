@@ -87,6 +87,8 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         builder: (context, ScreenState state) {
           return CustomScaffold(
+            isHomePage: true,
+            showAppBar: true,
             showGoPro: 'blue',
             backgroundColor: Color(0xFFA7E1E3),
             body: !(state.loading)
@@ -117,8 +119,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Positioned(
                         bottom: 70,
-                        right: MediaQuery.of(context).size.width / 4,
-                        left: MediaQuery.of(context).size.width / 4,
+                        right: MediaQuery.of(context).size.width / 5,
+                        left: MediaQuery.of(context).size.width / 5,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: _MainButton(
@@ -179,10 +181,14 @@ class _MainButtonState extends State<_MainButton>
       alignment: Alignment.center,
       children: [
         Container(
-          height: 152,
-          width: 152,
+          height: 172,
+          width: 172,
           decoration: BoxDecoration(
-            color: BC.purple,
+           gradient: LinearGradient(
+             begin: Alignment.centerLeft,
+             end: Alignment.centerRight,
+             colors: [BC.darkBlue, BC.yellow],
+           ),
             shape: BoxShape.circle,
           ),
         ),
@@ -192,11 +198,11 @@ class _MainButtonState extends State<_MainButton>
             duration: BDuration.d200,
             opacity: homeBloc.buttonController.isAnimating ? 1 : 0,
             child: Container(
-              height: 152,
-              width: 152,
+              height: 172,
+              width: 172,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [BC.purple, BC.braun],
+                  colors: [BC.darkBlue, BC.yellow],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -209,7 +215,7 @@ class _MainButtonState extends State<_MainButton>
           height: 148,
           width: 148,
           decoration: BoxDecoration(
-            color: BC.darkGrey,
+            color: BC.white1,
             shape: BoxShape.circle,
           ),
           child: InkWell(
@@ -220,7 +226,12 @@ class _MainButtonState extends State<_MainButton>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Assets.icons.group1.svg(),
+                Assets.icons.group1.svg(
+                  colorFilter: ColorFilter.mode(
+                    BC.green1,
+                    BlendMode.srcIn,
+                  )
+                ),
                 Space.h16,
                 Text(
                   widget.isConnected ? s.disconnect : s.connect,

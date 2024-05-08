@@ -44,8 +44,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
         return Container(
           height: 70,
           padding: const EdgeInsets.only(top: 4, bottom: 4),
-          decoration: BoxDecoration(
-            color: BC.white,
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
           ),
           width: double.infinity,
           child: SafeArea(
@@ -62,7 +62,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                       children: [
                         ColorFiltered(
                           colorFilter: ColorFilter.mode(
-                            i == tabsRouter.activeIndex ? BC.purple : BC.grey,
+                            i == tabsRouter.activeIndex ? BC.green1 : BC.grey,
                             BlendMode.srcIn,
                           ),
                           child: items[i].icon,

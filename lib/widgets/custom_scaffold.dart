@@ -16,7 +16,7 @@ class CustomScaffold extends StatelessWidget {
       super.key,
       this.resizeToAvoidBottomInset,
       this.showGoPro,
-      this.backgroundColor});
+      this.backgroundColor, this.showAppBar = false, this.isHomePage, this.showLine});
 
   final PreferredSizeWidget? appBar;
   final Widget body;
@@ -24,6 +24,9 @@ class CustomScaffold extends StatelessWidget {
   final bool? resizeToAvoidBottomInset;
   final String? showGoPro;
   final Color? backgroundColor;
+  final bool? showAppBar;
+  final bool? isHomePage;
+  final bool? showLine;
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +40,35 @@ class CustomScaffold extends StatelessWidget {
             body: SafeArea(
                 child: Column(
               children: [
-                // Container(
-                //   padding: const EdgeInsets.all(16.0),
-                //   decoration: BoxDecoration(
-                //     color: BC.black,
-                //   ),
-                //   child: Row(
-                //     children: [
-                //       Text('Bomber VPN', style: BS.bold24),
-                //       const Spacer(),
-                //       if (showGoPro != null)
-                //         InkWell(
-                //             onTap: () =>
-                //                 context.router.push(const GoProRoute()),
-                //             child: (state.isVip)
-                //                 ? Assets.icons.pro.svg()
-                //                 : Assets.icons.proYelov.svg()),
-                //     ],
-                //   ),
-                // ),
+              if(showAppBar ?? false)  Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent
+                  ),
+                  child: Row(
+                    children: [
+                      Text('Bomber VPN', style: BS.bold24.apply(color: (isHomePage ?? false) ?  BC.white : BC.black)),
+                      const Spacer(),
+                      if (showGoPro != null)
+                        InkWell(
+                            onTap: () =>
+                                context.router.push(const GoProRoute()),
+                            child: (state.isVip)
+                                ? Assets.icons.pro.svg()
+                                : Assets.icons.proYelov.svg(
+                              colorFilter: (isHomePage ?? false) ? ColorFilter.mode(BC.white, BlendMode.srcIn) : null,
+                            )),
+                    ],
+                  ),
+                ),
+                ( (showLine ?? false)) ? Container(
+                  width: MediaQuery.of(context).size.width - 48,
+                  height: 1,
+                  color: BC.lightGrey.withOpacity(0.3),
+                ) : const SizedBox(),
                 Expanded(child: body),
               ],
+
             )),
           );
         });

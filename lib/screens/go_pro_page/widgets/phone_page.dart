@@ -94,7 +94,7 @@ class PhonePage extends StatelessWidget {
               GrayButton(onTap: () {}, title: s.try_premium_free),
               Space.h16,
               Text('${s.seven_days} \$/${s.month}',
-                  style: BS.reg14.apply(color: BC.grey)),
+                  style: BS.reg14.apply(color: BC.green1)),
             ],
           ),
         ],

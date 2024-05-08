@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vpn/generated/assets.gen.dart';
 import 'package:vpn/generated/l10n.dart';
@@ -34,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, state) {
           final s = S.of(context);
           return CustomScaffold(
+              showAppBar: true,
               showGoPro: 'Yellow',
               body: (!(state.loading))
                   ? const CustomIndicator()
@@ -48,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.fromLTRB(14, 21, 14, 11),
                             decoration: BoxDecoration(
                               borderRadius: BRadius.r18,
-                              color: BC.darkGrey,
+                              color: BC.white1,
+                              boxShadow: BShadow.light2,
                             ),
                             child: Column(
                               children: [
@@ -64,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   name: s.city,
                                   description: state.user?.geoInfo?.stateProv,
                                 ),
-                                 _CustomText(
+                                _CustomText(
                                   name: 'ISP',
                                   description: state.user?.geoInfo?.isp,
                                 ),
@@ -75,10 +78,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                           ),
-                          Space.h8,
+                          Space.h12,
                           Text(
                             s.this_information_is_only_available_on_your_device,
-                            style: BS.bold12,
+                            style: BS.bold12.apply(color: BC.green1),
                           ),
                           Space.h32,
                           Space.h24,
@@ -91,23 +94,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                     horizontal: 14, vertical: 21),
                                 decoration: BoxDecoration(
                                   borderRadius: BRadius.r18,
-                                  color: BC.darkGrey,
+                                  color: BC.green1,
+                                  border:
+                                      Border.all(color: BC.yellow, width: 1),
                                 ),
                                 child: Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      GradientText(
+                                      Text(
                                         s.get_access_to_unlimited_speed_and_premium_locations,
-                                        gradient: LinearGradient(
-                                          colors: [BC.purple, BC.braun],
-                                        ),
-                                        style: BS.bold24,
+                                        style:
+                                            BS.bold20.apply(color: BC.yellow),
+                                        textAlign: TextAlign.center,
                                       ),
                                       Space.h8,
                                       Icon(
                                         Icons.keyboard_arrow_down,
-                                        color: BC.black,
+                                        color: BC.yellow,
                                         size: 24,
                                       ),
                                     ],
@@ -115,6 +119,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
+                          const Spacer(),
+                          Text('App version 1.0.0',
+                              style: BS.reg12.apply(color: BC.green1)),
                         ],
                       ),
                     ));

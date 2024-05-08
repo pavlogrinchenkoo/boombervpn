@@ -35,18 +35,19 @@ class _VipIndicatorState extends State<VipIndicator>
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: BC.black,
+            color: BC.white1,
+            boxShadow: BShadow.light2,
           ),
           child: Stack(
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Expire', style: BS.reg12),
+                  Text('Expire', style: BS.reg12.apply(color: BC.darkGrey)),
                   Space.h10,
-                  Center(child: Text('248', style: BS.sb24)),
+                  Center(child: Text('248', style: BS.sb24.apply(color: BC.black))),
                   Space.h10,
-                  Text('Days', style: BS.reg12),
+                  Text('Days', style: BS.reg12.apply(color: BC.darkGrey)),
                 ],
               ),
               Positioned(
@@ -70,9 +71,9 @@ class _VipIndicatorState extends State<VipIndicator>
           ),
         ),
         Space.h8,
-        Text('Your are secured Until', style: BS.sb14),
+        Text('Your are secured Until', style: BS.sb16.apply(color: BC.yellow)),
         Space.h8,
-        Text('Oct 22nd, 2021', style: BS.sb14),
+        Text('Oct 22nd, 2021', style: BS.sb14.apply(color: BC.yellow)),
       ],
     );
   }

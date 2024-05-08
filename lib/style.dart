@@ -5,7 +5,7 @@ class ThemeColors {
   static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff000000);
   static const Color grey = Color(0xffAEAEAE);
-  static const Color darkGrey = Color(0xff232026);
+  static const Color darkGrey = Color(0xff777777);
   static const Color lightGrey = Color(0xffB5AEBE);
   static const Color purple = Color(0xff6622CC);
   static const Color braun = Color(0xffB7970A);
@@ -17,6 +17,7 @@ class ThemeColors {
   static const Color white1 = Color(0xffFCFCFC);
   static const Color blue1 = Color(0xffD5F2EA);
   static const Color green1 = Color(0xff77A049);
+  static const Color darkBlue = Color(0xff0B2EE8);
 
 }
 
@@ -28,7 +29,6 @@ abstract class BC {
   static Color get grey => ThemeColors.grey;
   static Color get darkGrey => ThemeColors.darkGrey;
   static Color get lightGrey => ThemeColors.lightGrey;
-  static Color get purple => ThemeColors.purple;
   static Color get braun => ThemeColors.braun;
   static Color get yellow => ThemeColors.yellow;
   static Color get blue => ThemeColors.blue;
@@ -37,6 +37,7 @@ abstract class BC {
   static Color get lightBlue => ThemeColors.lightBlue;
   static Color get blue1 => ThemeColors.blue1;
   static Color get green1 => ThemeColors.green1;
+  static Color get darkBlue => ThemeColors.darkBlue;
 }
 
 abstract class BS {
@@ -69,6 +70,24 @@ abstract class BS {
     color: BC.green1,
   );
 
+  static TextStyle get bold20 => TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 20.0,
+    fontWeight: FontWeight.w700,
+    height: 25.0 / 24.0,
+    letterSpacing: -0.02,
+    color: BC.green1,
+  );
+
+  static TextStyle get bold18 => TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 18.0,
+    fontWeight: FontWeight.w700,
+    height: 25.0 / 24.0,
+    letterSpacing: -0.02,
+    color: BC.black,
+  );
+
   static TextStyle get bold16 => TextStyle(
     fontFamily: 'Roboto',
     fontSize: 16.0,
@@ -85,6 +104,15 @@ abstract class BS {
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
     color: BC.black,
+  );
+
+  static TextStyle get sb16 => TextStyle(
+    fontFamily: 'Sora',
+    fontSize: 16.0,
+    fontWeight: FontWeight.w600,
+    height: 25.0 / 24.0,
+    letterSpacing: -0.02,
+    color: BC.white,
   );
 
   static TextStyle get sb15 => TextStyle(
@@ -176,7 +204,7 @@ abstract class BS {
     fontWeight: FontWeight.w400,
     height: 25.0 / 24.0,
     letterSpacing: -0.02,
-    color: BC.black,
+    color: BC.green1,
   );
 
   static TextStyle get reg15 => TextStyle(
@@ -236,4 +264,11 @@ abstract class BShadow {
             blurRadius: 60,
             offset: const Offset(0, 2))
       ];
+
+  static List<BoxShadow> get light2 => [
+    BoxShadow(
+        color: BC.black.withOpacity(0.1),
+        blurRadius: 10,
+        offset: const Offset(0, 10))
+  ];
 }

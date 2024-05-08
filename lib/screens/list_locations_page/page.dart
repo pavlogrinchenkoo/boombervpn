@@ -36,16 +36,16 @@ class _ListLocationsPageState extends State<ListLocationsPage> {
     return CustomStreamBuilder(
         bloc: bloc,
         builder: (context, ScreenState state) {
-
           return CustomScaffold(
+              showLine: true,
+              showAppBar: true,
               showGoPro: 'yellow',
               body: !(state.loading)
                   ? const CustomIndicator()
-              // TODO винести у приватний віджет
                   : ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
                       children: [
-                        Text('${s.freemium_locations}:', style: BS.bold12),
                         Space.h8,
                         Column(
                           children: [

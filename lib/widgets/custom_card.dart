@@ -21,7 +21,7 @@ class CustomCard extends StatelessWidget {
       borderRadius: BRadius.r18,
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(color: BC.darkGrey, borderRadius: BRadius.r18),
+        decoration: BoxDecoration(color: BC.white1, borderRadius: BRadius.r18),
         child: Row(
           children: [
             Container(
@@ -77,9 +77,9 @@ class CustomCardLocation extends StatelessWidget {
       onTap: onTap,
       borderRadius: BRadius.r18,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(color: BC.darkGrey, borderRadius: BRadius.r18),
+        decoration: BoxDecoration(color: BC.white1, borderRadius: BRadius.r18, boxShadow: BShadow.light2),
         child: Row(
           children: [
             Container(

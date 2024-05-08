@@ -126,9 +126,11 @@ class _CustomContainerSwitch extends StatelessWidget {
             Switch(
               value: value,
               onChanged: onTap,
-              activeColor: BC.purple,
-              inactiveThumbColor: BC.purple,
-              inactiveTrackColor: BC.grey,
+              activeColor: BC.green1,
+              activeTrackColor: BC.blue1,
+              inactiveThumbColor: BC.green1,
+              inactiveTrackColor: BC.blue1,
+              trackOutlineColor: MaterialStateProperty.all(BC.blue1),
             ),
           ],
         ),
@@ -162,7 +164,7 @@ class _CustomContainer extends StatelessWidget {
       children: [
         Text(
           title,
-          style: BS.reg14.apply(color: BC.grey),
+          style: BS.reg14.apply(color: BC.green1),
         ),
         Space.h16,
         Row(
@@ -180,7 +182,7 @@ class _CustomContainer extends StatelessWidget {
                 width: 22,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: isShowButton ? BC.purple : BC.grey),
+                  border: Border.all(color: isShowButton ? BC.green1 : BC.grey),
                 ),
                 child: isShowButton
                     ? Container(
@@ -188,7 +190,7 @@ class _CustomContainer extends StatelessWidget {
                         width: 10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: BC.purple,
+                          color: BC.green1,
                         ),
                         margin: const EdgeInsets.all(4),
                       )

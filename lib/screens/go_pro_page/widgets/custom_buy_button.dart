@@ -38,7 +38,7 @@ class CustomBuyButton extends StatelessWidget {
           children: [
             Text(
               title,
-              style: BS.med18,
+              style: BS.med18.apply(color: BC.white),
             ),
             Space.w4,
             if (discount != null)
@@ -46,7 +46,7 @@ class CustomBuyButton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                 decoration: BoxDecoration(
                   borderRadius: BRadius.r20,
-                  color: BC.black,
+                  color: BC.white,
                 ),
                 child: Text(
                   discount ?? '',
@@ -56,10 +56,10 @@ class CustomBuyButton extends StatelessWidget {
             const Spacer(),
             Text(
               price,
-              style: BS.bold24,
+              style: BS.bold24.apply(color: BC.white),
             ),
             Space.w4,
-            Text(description, style: BS.med18),
+            Text(description, style: BS.med18.apply(color: BC.white)),
           ],
         ),
       ),
@@ -84,11 +84,11 @@ class GrayButton extends StatelessWidget {
           vertical: 16,
         ),
         decoration:
-        BoxDecoration(borderRadius: BRadius.r30, color: BC.darkGrey),
+        BoxDecoration(borderRadius: BRadius.r30, color: BC.white1, boxShadow: BShadow.light2),
         child: Center(
           child: Text(
             title,
-            style: BS.bold16,
+            style: BS.bold18.apply(color: BC.green1),
             textAlign: TextAlign.center,
           ),
         ),
