@@ -14,14 +14,16 @@ class CustomScaffold extends StatelessWidget {
       required this.body,
       this.bottomNavigationBar,
       super.key,
-      this.resizeToAvoidBottomInset, this.showGoPro, this.backgroundColor});
+      this.resizeToAvoidBottomInset,
+      this.showGoPro,
+      this.backgroundColor});
 
   final PreferredSizeWidget? appBar;
   final Widget body;
-  final Color? backgroundColor;
   final Widget? bottomNavigationBar;
   final bool? resizeToAvoidBottomInset;
   final String? showGoPro;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
