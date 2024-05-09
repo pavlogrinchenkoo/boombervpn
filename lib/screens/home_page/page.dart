@@ -33,10 +33,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   VpnStatus? status;
   VPNStage? stage;
+  Stopwatch stopwatch = Stopwatch();
+
 
   @override
   void initState() {
-    homeBloc.init(context);
+    homeBloc.init(context, stopwatch);
     openVPN();
     super.initState();
   }
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             isHomePage: true,
             showAppBar: true,
             showGoPro: 'blue',
-            backgroundColor: Color(0xFFA7E1E3),
+            backgroundColor: const Color(0xFFA7E1E3),
             body: !(state.loading)
                 ? const CustomIndicator()
                 : Stack(
@@ -124,6 +126,7 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: _MainButton(
+                            stopwatch: stopwatch,
                             isStartAnimation: state.isShowAnimation ?? false,
                             isConnected: state.isConnected,
                             onTap: () {
@@ -131,9 +134,10 @@ class _HomePageState extends State<HomePage> {
                                 homeBloc.connected(
                                   context,
                                   state.server ?? Server(),
+                                  stopwatch,
                                 );
                               } else {
-                                homeBloc.disconnect();
+                                homeBloc.disconnect(stopwatch);
                               }
                               // homeBloc.startAnimation();
                             },
@@ -152,12 +156,13 @@ class _MainButton extends StatefulWidget {
   final bool isConnected;
   final bool isStartAnimation;
   final Function()? onTap;
+  final   Stopwatch stopwatch;
 
   const _MainButton(
       {super.key,
       this.onTap,
       this.isConnected = false,
-      required this.isStartAnimation});
+      required this.isStartAnimation, required this.stopwatch});
 
   @override
   State<_MainButton> createState() => _MainButtonState();
@@ -176,6 +181,7 @@ class _MainButtonState extends State<_MainButton>
 
   @override
   Widget build(BuildContext context) {
+    final stopwatch = widget.stopwatch;
     final s = S.of(context);
     return Stack(
       alignment: Alignment.center,
@@ -217,9 +223,12 @@ class _MainButtonState extends State<_MainButton>
           decoration: BoxDecoration(
             color: BC.white1,
             shape: BoxShape.circle,
+            boxShadow: BShadow.light2,
           ),
           child: InkWell(
-            onTap: () => widget.onTap?.call(),
+            onTap: () {
+              widget.onTap?.call();
+            },
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             borderRadius: BorderRadius.circular(148),
@@ -234,7 +243,7 @@ class _MainButtonState extends State<_MainButton>
                 ),
                 Space.h16,
                 Text(
-                  widget.isConnected ? s.disconnect : s.connect,
+                  widget.isConnected ? '${stopwatch.elapsed.inHours}:${(stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}:${(stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}' : s.connect,
                   style: BS.bold12,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,

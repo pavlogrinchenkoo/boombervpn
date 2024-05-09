@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:vpn/generated/l10n.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
@@ -40,7 +42,13 @@ class _AuthPageState extends State<AuthPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(child: Text(s.logo, style: BS.bold50)),
-                Space.h125,
+                // Space.h125,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Lottie.asset(
+                  'assets/animations/VPN_2.json',
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 43),
                   child: Column(

@@ -36,7 +36,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     buttonController = animationController;
   }
 
-  void init(BuildContext context) async {
+  void init(BuildContext context, Stopwatch stopwatch) async {
     try {
       final getLocation = await cache.getLocation();
       final locations = await locationsApi.getListLocation();
@@ -61,7 +61,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       final connectVpn = await cache.getConnectVPN();
       if (connectVpn && server != null && isConnected == false) {
         if (context.mounted) {
-          connected(context, server);
+          connected(context, server, stopwatch, isInit: true);
         }
       }
     } catch (e) {
@@ -92,8 +92,17 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     context.router.push(ListLocationsRoute(locations: currentState.locations));
   }
 
-  void connected(BuildContext context, Server server) async {
+  Future<void> connected(BuildContext context, Server server, Stopwatch stopwatch, {bool? isInit}) async {
     try {
+      final connection = currentState.connection;
+      if(connection) {
+        return;
+      }
+      if((isInit ?? false) == false) {
+        setState(currentState.copyWith(connection: true));
+      }
+
+
       homeBloc.buttonController.repeat();
       final user = await cache.getUser();
       final data = ConnectResponseModel(
@@ -112,6 +121,7 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       }
       final getIp = await locationsApi.getIp();
       setState(currentState.copyWith(isConnected: true, ip: getIp));
+      stopwatch.start();
     } on Exception catch (e) {
       buttonController.reset();
       final notification = await cache.getShowNotification();
@@ -135,11 +145,13 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     }
   }
 
-  void disconnect() async {
+  void disconnect(Stopwatch stopwatch) async {
+    stopwatch.stop();
+    stopwatch.reset();
     final getLocation = await cache.getLocation();
     engine.disconnect();
     setState(currentState.copyWith(
-        isConnected: false, isShowAnimation: false, isShowMarker: false));
+        isConnected: false, isShowAnimation: false, isShowMarker: false, connection: false));
     final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1,
         const Animation2());
     controller.removeMarkerAt(1);
@@ -323,6 +335,7 @@ class ScreenState {
   final MapLatLng? latLng;
   final String ip;
   final PictureInfo? pictureInfo;
+  final bool connection;
 
   ScreenState(
       {this.loading = false,
@@ -333,7 +346,8 @@ class ScreenState {
       this.isConnected = false,
       this.latLng,
       this.ip = '',
-      this.pictureInfo});
+      this.pictureInfo,
+      this.connection = false});
 
   ScreenState copyWith(
       {bool? loading,
@@ -344,7 +358,8 @@ class ScreenState {
       bool? isConnected,
       MapLatLng? latLng,
       String? ip,
-      PictureInfo? pictureInfo}) {
+      PictureInfo? pictureInfo,
+      bool? connection}) {
     return ScreenState(
         loading: loading ?? this.loading,
         server: server ?? this.server,
@@ -354,6 +369,7 @@ class ScreenState {
         isConnected: isConnected ?? this.isConnected,
         latLng: latLng ?? this.latLng,
         ip: ip ?? this.ip,
-        pictureInfo: pictureInfo ?? this.pictureInfo);
+        pictureInfo: pictureInfo ?? this.pictureInfo,
+        connection: connection ?? this.connection);
   }
 }

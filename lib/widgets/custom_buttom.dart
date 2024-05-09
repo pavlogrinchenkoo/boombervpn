@@ -37,7 +37,7 @@ class CustomButtonBlack extends StatelessWidget {
           borderRadius: BRadius.r10,
           color: BC.white,
           border: Border.all(
-            color: BC.darkGrey,
+            color: BC.green1,
             width: 1,
           )),
       child: InkWell(

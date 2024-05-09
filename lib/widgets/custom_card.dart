@@ -21,7 +21,8 @@ class CustomCard extends StatelessWidget {
       borderRadius: BRadius.r18,
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(color: BC.white1, borderRadius: BRadius.r18),
+        decoration: BoxDecoration(color: BC.white1, borderRadius: BRadius.r18,
+        boxShadow: BShadow.light2),
         child: Row(
           children: [
             Container(
