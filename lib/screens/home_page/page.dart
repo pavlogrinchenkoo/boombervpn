@@ -127,8 +127,6 @@ class _HomePageState extends State<HomePage> {
                                       onTap: () =>
                                           context.router.push(const GoProRoute()),
                                       child: Assets.icons.proYelov.svg(
-                                        colorFilter: ColorFilter.mode(
-                                            BC.white, BlendMode.srcIn),
                                       )),
                                 ],
                               ),

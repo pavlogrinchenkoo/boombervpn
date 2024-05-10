@@ -44,7 +44,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   CustomField(controller: controller, text: s.email, keyboardType: TextInputType.emailAddress),
                   Space.h24,
                   CustomButtonGray(
-                    onTap: () => bloc.showDialogRecaptcha(context, controller.text, bloc),
+                    onTap: () {
+                      bloc.showDialogRecaptcha(context, controller.text, bloc);
+                    },
                     text: s.send,
                   ),
                   Space.h32,

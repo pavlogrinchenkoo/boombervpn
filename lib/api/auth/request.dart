@@ -55,8 +55,8 @@ class AuthApi {
     }
   }
 
-  Future<void> resetPassword(SignUpModel data) async {
-    try {
+  Future<String?> resetPassword(SignUpModel data) async {
+
       const url = 'https://bombervip.com/api/user/sendPasswordResetLink';
       Response response = await dio.post(
         url,
@@ -70,11 +70,9 @@ class AuthApi {
         throw Exception(response.data['msg']);
       } else {
         print('Success: ${response.data['msg']}');
+        return response.data['msg'];
       }
-    } catch (error) {
-      print('Error: $error');
-      rethrow;
-    }
+
   }
 
   Future<UserResponseModel> getUser() async {

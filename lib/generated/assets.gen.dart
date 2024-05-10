@@ -33,9 +33,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Group 1.svg
   SvgGenImage get group1 => const SvgGenImage('assets/icons/Group 1.svg');
 
-  /// File path: assets/icons/Home.svg
-  SvgGenImage get home => const SvgGenImage('assets/icons/Home.svg');
-
   /// File path: assets/icons/Signal 1.svg
   SvgGenImage get signal1 => const SvgGenImage('assets/icons/Signal 1.svg');
 
@@ -47,6 +44,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/burrow_001.svg
   SvgGenImage get burrow001 => const SvgGenImage('assets/icons/burrow_001.svg');
+
+  /// File path: assets/icons/h.svg
+  SvgGenImage get h => const SvgGenImage('assets/icons/h.svg');
 
   /// File path: assets/icons/incognito.svg
   SvgGenImage get incognito => const SvgGenImage('assets/icons/incognito.svg');
@@ -79,11 +79,11 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         group1,
-        home,
         signal1,
         vector,
         add,
         burrow001,
+        h,
         incognito,
         line,
         premium,

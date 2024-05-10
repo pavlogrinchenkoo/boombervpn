@@ -24,7 +24,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
         label: '',
       ),
       NavigationBarItem(
-        icon: Assets.icons.home.svg(),
+        icon: Assets.icons.h.svg(width: 24),
         label: '',
       ),
       NavigationBarItem(
@@ -34,7 +34,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
     ];
     return AutoTabsScaffold(
       extendBody: true,
-      routes:  [
+      routes: [
         const ProfileRoute(),
         const HomeRoute(),
         const SettingsRoute(),
