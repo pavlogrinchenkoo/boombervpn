@@ -35,7 +35,7 @@ class CustomButtonBlack extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BRadius.r10,
-          color: BC.white,
+          color: Colors.transparent,
           border: Border.all(
             color: BC.green1,
             width: 1,

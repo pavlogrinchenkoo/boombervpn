@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/generated/assets.gen.dart';
 import 'package:vpn/generated/l10n.dart';
+import 'package:vpn/routers/routes.dart';
 import 'package:vpn/screens/home_page/widgets/map_animation.dart';
 import 'package:vpn/style.dart';
 import 'package:vpn/utils/custom_stream_builder.dart';
@@ -34,7 +36,6 @@ class _HomePageState extends State<HomePage> {
   VpnStatus? status;
   VPNStage? stage;
   Stopwatch stopwatch = Stopwatch();
-
 
   @override
   void initState() {
@@ -89,8 +90,8 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         builder: (context, ScreenState state) {
           return CustomScaffold(
-            isHomePage: true,
-            showAppBar: true,
+            // isHomePage: true,
+            // showAppBar: true,
             showGoPro: 'blue',
             backgroundColor: const Color(0xFFA7E1E3),
             body: !(state.loading)
@@ -103,9 +104,41 @@ class _HomePageState extends State<HomePage> {
                           isShowAnimation: state.isShowAnimation ?? false,
                           getLocation: state.latLng ?? const MapLatLng(1, 1),
                           pictureInfo: state.pictureInfo!),
-                      Space.h16,
                       Positioned(
-                        top: 24,
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        height: 64,
+                        child: ClipRRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 3),
+                            child: Container(
+                              height: 64,
+                              padding: const EdgeInsets.all(16.0),
+                              decoration: const BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: Row(
+                                children: [
+                                  Text('Bomber VPN',
+                                      style: BS.bold24.apply(color: BC.white)),
+                                  const Spacer(),
+                                  InkWell(
+                                      onTap: () =>
+                                          context.router.push(const GoProRoute()),
+                                      child: Assets.icons.proYelov.svg(
+                                        colorFilter: ColorFilter.mode(
+                                            BC.white, BlendMode.srcIn),
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Space.h16,
+                      Positioned(
+                        top: 84,
                         right: 0,
                         left: 0,
                         child: Padding(
@@ -156,13 +189,14 @@ class _MainButton extends StatefulWidget {
   final bool isConnected;
   final bool isStartAnimation;
   final Function()? onTap;
-  final   Stopwatch stopwatch;
+  final Stopwatch stopwatch;
 
   const _MainButton(
       {super.key,
       this.onTap,
       this.isConnected = false,
-      required this.isStartAnimation, required this.stopwatch});
+      required this.isStartAnimation,
+      required this.stopwatch});
 
   @override
   State<_MainButton> createState() => _MainButtonState();
@@ -190,11 +224,11 @@ class _MainButtonState extends State<_MainButton>
           height: 172,
           width: 172,
           decoration: BoxDecoration(
-           gradient: LinearGradient(
-             begin: Alignment.centerLeft,
-             end: Alignment.centerRight,
-             colors: [BC.darkBlue, BC.yellow],
-           ),
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [BC.darkBlue, BC.yellow],
+            ),
             shape: BoxShape.circle,
           ),
         ),
@@ -236,14 +270,15 @@ class _MainButtonState extends State<_MainButton>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Assets.icons.group1.svg(
-                  colorFilter: ColorFilter.mode(
-                    BC.green1,
-                    BlendMode.srcIn,
-                  )
-                ),
+                    colorFilter: ColorFilter.mode(
+                  BC.green1,
+                  BlendMode.srcIn,
+                )),
                 Space.h16,
                 Text(
-                  widget.isConnected ? '${stopwatch.elapsed.inHours}:${(stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}:${(stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}' : s.connect,
+                  widget.isConnected
+                      ? '${stopwatch.elapsed.inHours}:${(stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}:${(stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}'
+                      : s.connect,
                   style: BS.bold12,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
