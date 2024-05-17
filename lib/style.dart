@@ -12,6 +12,7 @@ class ThemeColors {
   static const Color yellow = Color(0xffFFD006);
   static const Color blue = Color(0xff123698);
   static const Color lightGreen = Color(0xff4FA6A9);
+  static const Color brown = Color(0xff47180D);
 }
 
 abstract class BC {
@@ -26,6 +27,7 @@ abstract class BC {
   static Color get yellow => ThemeColors.yellow;
   static Color get blue => ThemeColors.blue;
   static Color get lightGreen => ThemeColors.lightGreen;
+  static Color get brown => ThemeColors.brown;
 }
 
 abstract class BS {

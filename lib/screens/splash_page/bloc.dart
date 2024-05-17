@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:vpn/api/cache.dart';
 import 'package:vpn/api/locations/dto.dart';
 import 'package:vpn/api/locations/request.dart';
@@ -28,8 +28,9 @@ class SplashBloc extends BlocBaseWithState<ScreenState> {
       if (context.mounted) context.router.replaceAll([const AuthRoute()]);
     }
     final firstLaunch = await cache.getFirstLaunch();
+    final location = await cache.getLocation();
     // cache.removeLocation();
-    if (!firstLaunch) {
+    if (!firstLaunch && location.longitude == 1 && location.latitude == 1) {
       getCountry();
       cache.saveFirstLaunch(true);
     }
@@ -37,10 +38,19 @@ class SplashBloc extends BlocBaseWithState<ScreenState> {
 
   Future<void> getCountry() async {
     try {
-      Network n = Network("http://ip-api.com/json");
-      final locationSTR = (await n.getData());
-      final locationx = jsonDecode(locationSTR);
-      final latLong = LatLon(lat: locationx["lat"], lon: locationx["lon"]);
+      final hasPermission = await _determinePosition();
+      LatLon latLong;
+      if (hasPermission) {
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.medium);
+        latLong = LatLon(lat: position.latitude, lon: position.longitude);
+      } else {
+        Network n = Network("http://ip-api.com/json");
+        final locationSTR = (await n.getData());
+        final locationx = jsonDecode(locationSTR);
+        latLong = LatLon(lat: locationx["lat"], lon: locationx["lon"]);
+      }
+
       await cache.saveLocation(latLong);
     } on Exception catch (e) {
       print(e);
@@ -56,4 +66,41 @@ class ScreenState {
   ScreenState copyWith({bool? loading}) {
     return ScreenState(loading: loading ?? this.loading);
   }
+}
+
+Future<bool> _determinePosition() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+
+  // Test if location services are enabled.
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    // Location services are not enabled don't continue
+    // accessing the position and request users of the
+    // App to enable the location services.
+    return false;
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      // Permissions are denied, next time you could try
+      // requesting permissions again (this is also where
+      // Android's shouldShowRequestPermissionRationale
+      // returned true. According to Android guidelines
+      // your App should show an explanatory UI now.
+      return false;
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    // Permissions are denied forever, handle appropriately.
+    return false;
+  }
+
+  return true;
+  // When we reach here, permissions are granted and we can
+  // continue accessing the position of the device.
+  // return await Geolocator.getCurrentPosition();
 }
