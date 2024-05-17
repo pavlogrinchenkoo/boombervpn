@@ -149,16 +149,17 @@ class _MapAnimationState extends State<MapAnimation>
                     MapArcLayer(
                       arcs: {
                         MapArc(
-                            from: arcPoint.from,
-                            to: arcPoint.to,
-                            color: BC.green1,
-                            width: 8,
-                            heightFactor: 0,
-                            root: widget.pictureInfo),
+                          from: arcPoint.from,
+                          to: arcPoint.to,
+                          color: BC.brown,
+                          width: 8,
+                          heightFactor: 0,
+                          // root: widget.pictureInfo
+                        ),
                       },
                       animation: animation,
-                      fr: -2,
-                      sr: -2,
+                      // fr: -2,
+                      // sr: -2,
                     ),
                   ]
                 : [],

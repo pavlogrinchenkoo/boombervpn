@@ -18,7 +18,7 @@ class ThemeColors {
   static const Color blue1 = Color(0xffD5F2EA);
   static const Color green1 = Color(0xff77A049);
   static const Color darkBlue = Color(0xff0B2EE8);
-
+  static const Color brown = Color(0xff47180D);
 }
 
 abstract class BC {
@@ -38,6 +38,7 @@ abstract class BC {
   static Color get blue1 => ThemeColors.blue1;
   static Color get green1 => ThemeColors.green1;
   static Color get darkBlue => ThemeColors.darkBlue;
+  static Color get brown => ThemeColors.brown;
 }
 
 abstract class BS {

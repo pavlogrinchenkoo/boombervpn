@@ -381,72 +381,72 @@ Path _get1SvgPath(Size size, Path path, Point start, Point end,
   return path;
 }
 
-class CurvePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Path path = Path();
-    Paint paint = Paint()
-      ..color = Colors.brown
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.fill
-      ..strokeJoin = StrokeJoin.round;
-
-    Offset startPoint = Offset(300, 300);
-    Offset endPoint = Offset(50, 50);
-    int humps =
-        startPoint.dx > endPoint.dx ? endPoint.dx ~/ 4 : startPoint.dx ~/ 4;
-
-    path.moveTo(startPoint.dx, startPoint.dy);
-
-    double dx = endPoint.dx - startPoint.dx;
-    double dy = (endPoint.dy + 10) - (startPoint.dy + 10);
-    double dist = sqrt(dx * dx + dy * dy);
-
-    double humpWidth = dist / (humps * 2);
-    double lastX = 0;
-    double lastY = 0;
-
-    for (int i = 1; i <= humps * 2; i++) {
-      double t = i / (humps * 2);
-      double x = startPoint.dx + dx * t;
-      double y = (startPoint.dy + 10) + dy * t;
-      if (i % 2 == 0) {
-        y += sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
-      } else {
-        y -= sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
-      }
-      path.lineTo(x, y);
-      lastX = x;
-      lastY = y;
-    }
-
-    path.lineTo(lastX, lastY - 15);
-    path.moveTo(startPoint.dx, startPoint.dy);
-    path.lineTo(startPoint.dx, startPoint.dy - 10);
-
-    dx = endPoint.dx - startPoint.dx;
-    dy = (endPoint.dy) - (startPoint.dy);
-    dist = sqrt(dx * dx + dy * dy);
-
-    for (int i = 1; i <= humps * 2; i++) {
-      double t = i / (humps * 2);
-      double x = startPoint.dx + dx * t;
-      double y = (startPoint.dy - 5) + dy * t;
-      if (i % 2 == 0) {
-        y += sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
-      } else {
-        y -= sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
-      }
-      path.lineTo(x, y);
-    }
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
+// class CurvePainter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     Path path = Path();
+//     Paint paint = Paint()
+//       ..color = Colors.brown
+//       ..strokeWidth = 2.0
+//       ..style = PaintingStyle.fill
+//       ..strokeJoin = StrokeJoin.round;
+//
+//     Offset startPoint = Offset(300, 300);
+//     Offset endPoint = Offset(50, 50);
+//     int humps =
+//         startPoint.dx > endPoint.dx ? endPoint.dx ~/ 4 : startPoint.dx ~/ 4;
+//
+//     path.moveTo(startPoint.dx, startPoint.dy);
+//
+//     double dx = endPoint.dx - startPoint.dx;
+//     double dy = (endPoint.dy + 10) - (startPoint.dy + 10);
+//     double dist = sqrt(dx * dx + dy * dy);
+//
+//     double humpWidth = dist / (humps * 2);
+//     double lastX = 0;
+//     double lastY = 0;
+//
+//     for (int i = 1; i <= humps * 2; i++) {
+//       double t = i / (humps * 2);
+//       double x = startPoint.dx + dx * t;
+//       double y = (startPoint.dy + 10) + dy * t;
+//       if (i % 2 == 0) {
+//         y += sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
+//       } else {
+//         y -= sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
+//       }
+//       path.lineTo(x, y);
+//       lastX = x;
+//       lastY = y;
+//     }
+//
+//     path.lineTo(lastX, lastY - 15);
+//     path.moveTo(startPoint.dx, startPoint.dy);
+//     path.lineTo(startPoint.dx, startPoint.dy - 10);
+//
+//     dx = endPoint.dx - startPoint.dx;
+//     dy = (endPoint.dy) - (startPoint.dy);
+//     dist = sqrt(dx * dx + dy * dy);
+//
+//     for (int i = 1; i <= humps * 2; i++) {
+//       double t = i / (humps * 2);
+//       double x = startPoint.dx + dx * t;
+//       double y = (startPoint.dy - 5) + dy * t;
+//       if (i % 2 == 0) {
+//         y += sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
+//       } else {
+//         y -= sin(t * pi * humps) * doubleInRange(Random(), -5, 5);
+//       }
+//       path.lineTo(x, y);
+//     }
+//     canvas.drawPath(path, paint);
+//   }
+//
+//   @override
+//   bool shouldRepaint(CustomPainter oldDelegate) {
+//     return false;
+//   }
+// }
 
 class Point {
   final int x;
