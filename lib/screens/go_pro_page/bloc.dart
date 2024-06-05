@@ -19,12 +19,12 @@ class GoProBloc extends BlocBaseWithState<ScreenState> {
   void init() async {}
 
   void subscribe(BuildContext context) async {
-    cache.saveSubscribe(true);
-    scaffoldBloc.init();
-    blocProfile.init();
-    if (context.mounted) {
-      context.router.push(const HomeRoute());
-    }
+    // cache.saveSubscribe(true);
+    // scaffoldBloc.init();
+    // blocProfile.init();
+    // if (context.mounted) {
+    //   context.router.push(const HomeRoute());
+    // }
   }
 }
 

@@ -120,7 +120,7 @@ class Cache {
   Future<MapLatLng> getLocation() async {
     final prefs = await SharedPreferences.getInstance();
     final stringLocation = prefs.getString('location');
-    if (stringLocation == null) return const MapLatLng(1, 1);
+    if (stringLocation == null) return const MapLatLng(47.91048, 33.39178);
     final location = LatLon.fromJson(jsonDecode(stringLocation));
     final latLng = MapLatLng(location.lat, location.lon);
     return latLng;

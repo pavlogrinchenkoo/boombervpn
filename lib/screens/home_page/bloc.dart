@@ -71,6 +71,30 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
       }
     }
   }
+  
+  DateTime currentDate = DateTime.now();
+  bool isAll = false;
+  bool nowLoading = false;
+
+  void uploadItems() {
+    if(isAll && nowLoading) return;
+    nowLoading = true;
+
+    final nextDate = DateTime(currentDate.year, currentDate.month - 1, currentDate.day);
+    final key = 'idBudget/records/${nextDate.year}/${nextDate.month}';
+    currentDate = nextDate;
+    print(key);
+
+    final records = [];
+
+    if(records.isEmpty) {
+      isAll = true;
+    } else {
+      // addTo view
+    }
+
+    nowLoading = false;
+  }
 
   void initMap() async {
     await Future.delayed(const Duration(seconds: 2));
@@ -92,16 +116,17 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     context.router.push(ListLocationsRoute(locations: currentState.locations));
   }
 
-  Future<void> connected(BuildContext context, Server server, Stopwatch stopwatch, {bool? isInit}) async {
+  Future<void> connected(
+      BuildContext context, Server server, Stopwatch stopwatch,
+      {bool? isInit}) async {
     try {
       final connection = currentState.connection;
-      if(connection) {
+      if (connection) {
         return;
       }
-      if((isInit ?? false) == false) {
+      if ((isInit ?? false) == false) {
         setState(currentState.copyWith(connection: true));
       }
-
 
       homeBloc.buttonController.repeat();
       final user = await cache.getUser();
@@ -151,7 +176,10 @@ class HomeBloc extends BlocBaseWithState<ScreenState> {
     final getLocation = await cache.getLocation();
     engine.disconnect();
     setState(currentState.copyWith(
-        isConnected: false, isShowAnimation: false, isShowMarker: false, connection: false));
+        isConnected: false,
+        isShowAnimation: false,
+        isShowMarker: false,
+        connection: false));
     final model = Model(getLocation.latitude ?? 1, getLocation.longitude ?? 1,
         const Animation2());
     controller.removeMarkerAt(1);

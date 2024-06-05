@@ -115,19 +115,18 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               height: 64,
                               padding: const EdgeInsets.all(16.0),
-                              decoration: const BoxDecoration(
-                                color: Colors.transparent,
+                              decoration: BoxDecoration(
+                                color: BC.white,
                               ),
                               child: Row(
                                 children: [
                                   Text('Bomber VPN',
-                                      style: BS.bold24.apply(color: BC.white)),
+                                      style: BS.bold24.apply(color: BC.black)),
                                   const Spacer(),
                                   InkWell(
-                                      onTap: () =>
-                                          context.router.push(const GoProRoute()),
-                                      child: Assets.icons.proYelov.svg(
-                                      )),
+                                      onTap: () => context.router
+                                          .push(const GoProRoute()),
+                                      child: Assets.icons.proYelov.svg()),
                                 ],
                               ),
                             ),
@@ -151,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Positioned(
-                        bottom: 70,
+                        bottom: 90,
                         right: MediaQuery.of(context).size.width / 5,
                         left: MediaQuery.of(context).size.width / 5,
                         child: Padding(

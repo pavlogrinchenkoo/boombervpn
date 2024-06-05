@@ -34,23 +34,24 @@ class _DashBoardPageState extends State<DashBoardPage> {
     ];
     return AutoTabsScaffold(
       extendBody: true,
-      routes: [
-        const ProfileRoute(),
-        const HomeRoute(),
-        const SettingsRoute(),
-        ListLocationsRoute(),
+      routes: const [
+        ProfileRoute(),
+        HomeRoute(),
+        SettingsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return Container(
-          height: 70,
-          padding: const EdgeInsets.only(top: 4, bottom: 4),
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
+          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          padding: const EdgeInsets.only(top: 8, bottom: 4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: BC.white,
+            boxShadow: BShadow.bottomNavBar,
           ),
           width: double.infinity,
           child: SafeArea(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 for (int i = 0; i < items.length; i++)
                   CustomIcon(

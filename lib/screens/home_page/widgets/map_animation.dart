@@ -73,16 +73,16 @@ class _MapAnimationState extends State<MapAnimation>
       },
       shapeColorValueMapper: (int index) {
         return [
-          Color(0xFF70A452),
-          Color(0xFF7AAE59),
-          Color(0xFF6DAA4B),
-          Color(0xFF6DAA4B),
-          Color(0xFF7CB254),
-          Color(0xFF69A241),
-          Color(0xFF6BA743),
-          Color(0xFF7CB25E),
-          Color(0xFF7CB25E),
-          Color(0xFF67A53F),
+          const Color(0xFF70A452),
+          const Color(0xFF7AAE59),
+          const Color(0xFF6DAA4B),
+          const Color(0xFF6DAA4B),
+          const Color(0xFF7CB254),
+          const Color(0xFF69A241),
+          const Color(0xFF6BA743),
+          const Color(0xFF7CB25E),
+          const Color(0xFF7CB25E),
+          const Color(0xFF67A53F),
         ][(index + 10) % 10];
       },
     );

@@ -31,8 +31,8 @@ class AppRouter extends _$AppRouter {
       AutoRoute(path: 'profile', page: ProfileRoute.page),
       AutoRoute(path: 'home', page: HomeRoute.page),
       AutoRoute(path: 'settings', page: SettingsRoute.page),
-      AutoRoute(path: 'list-locations', page: ListLocationsRoute.page),
     ]),
+    AutoRoute(path: '/list-locations', page: ListLocationsRoute.page),
     AutoRoute(path: '/go-pro', page: GoProRoute.page),
   ];
 }

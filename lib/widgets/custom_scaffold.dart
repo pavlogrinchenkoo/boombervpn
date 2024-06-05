@@ -38,6 +38,7 @@ class CustomScaffold extends StatelessWidget {
             backgroundColor: backgroundColor ?? BC.white,
             bottomNavigationBar: bottomNavigationBar,
             body: SafeArea(
+              bottom: false,
                 child: Column(
               children: [
               if(showAppBar ?? false)  Container(

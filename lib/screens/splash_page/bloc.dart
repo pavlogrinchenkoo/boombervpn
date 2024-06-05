@@ -30,7 +30,8 @@ class SplashBloc extends BlocBaseWithState<ScreenState> {
     final firstLaunch = await cache.getFirstLaunch();
     final location = await cache.getLocation();
     // cache.removeLocation();
-    if (!firstLaunch && location.longitude == 1 && location.latitude == 1) {
+    if (!firstLaunch ||
+        (location.longitude == 33.39178 && location.latitude == 47.91048)) {
       getCountry();
       cache.saveFirstLaunch(true);
     }

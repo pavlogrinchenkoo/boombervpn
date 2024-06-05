@@ -19,6 +19,7 @@ class ThemeColors {
   static const Color green1 = Color(0xff77A049);
   static const Color darkBlue = Color(0xff0B2EE8);
   static const Color brown = Color(0xff47180D);
+  static const Color transparent = Color(0xff47180D);
 }
 
 abstract class BC {
@@ -39,6 +40,7 @@ abstract class BC {
   static Color get green1 => ThemeColors.green1;
   static Color get darkBlue => ThemeColors.darkBlue;
   static Color get brown => ThemeColors.brown;
+  static Color get transparent => ThemeColors.transparent;
 }
 
 abstract class BS {
@@ -271,5 +273,12 @@ abstract class BShadow {
         color: BC.black.withOpacity(0.1),
         blurRadius: 10,
         offset: const Offset(0, 10))
+  ];
+
+  static List<BoxShadow> get bottomNavBar => [
+    BoxShadow(
+        color: BC.black.withOpacity(0.3),
+        blurRadius: 10,
+        offset: const Offset(0, 5))
   ];
 }
